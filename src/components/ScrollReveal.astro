@@ -1,0 +1,35 @@
+---
+// Wrapper that fades + lifts its children into view once.
+const { class: className = "", delay = 0, as = "div" } = Astro.props;
+const Tag = as;
+---
+<Tag class={`reveal ${className}`} style={delay ? `transition-delay:${delay}ms` : undefined}>
+  <slot />
+</Tag>
+
+<script>
+  // Idempotent: only wire up the observer once per page.
+  if (!(window as any).__revealObserver) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.15 }
+    );
+    (window as any).__revealObserver = observer;
+    const register = () =>
+      document.querySelectorAll(".reveal:not(.is-visible)").forEach((el) => observer.observe(el));
+    register();
+    document.addEventListener("astro:after-swap", register);
+  } else {
+    (window as any).__revealObserver &&
+      document.querySelectorAll(".reveal:not(.is-visible)").forEach((el) =>
+        (window as any).__revealObserver.observe(el)
+      );
+  }
+</script>

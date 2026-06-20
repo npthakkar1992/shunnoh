@@ -1,0 +1,188 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import ScrollReveal from "../components/ScrollReveal.astro";
+
+const themes = [
+  {
+    num: "01",
+    title: ["Experiential Travel & ", "Immersive Writing"],
+    bg: false,
+    description:
+      "Writing that puts the reader inside the moment — not observing a place, but feeling its temperature, hearing its rhythm, smelling its streets.",
+    gallery: ["Ghats at dawn", "Street scene", "On the water"],
+    excerpt:
+      "The ghats of Varanasi do not greet you — they confront you. Before your feet find the first wet step, the city has already decided what it will show you: the smoke that curls upward carrying someone's last prayer, the marigold garlands sinking slowly into water that has held ten thousand years of faith.",
+    citationHref: "/blogs/varanasi",
+    articles: [
+      { label: "Varanasi", href: "/blogs/varanasi" },
+      { label: "Goa's Glowing Forest", href: "/blogs/goa" },
+    ],
+  },
+  {
+    num: "02",
+    title: ["Destination ", "Stories"],
+    bg: true,
+    description:
+      "Places told through their people, their food, their rituals. Not travel guides — travel stories.",
+    gallery: ["Sarnath", "Varanasi food", "Goa forest"],
+    excerpt:
+      "Stepping off the plane, I noticed a fellow passenger, an older gentleman, pause. The moment his foot touched the ground, he set his luggage aside and, with a reverent bow, touched his forehead to the cold tarmac — a silent, heartfelt greeting to the sacred city.",
+    citationHref: "/blogs/varanasi",
+    articles: [
+      { label: "Sarnath", href: "/blogs/sarnath" },
+      { label: "Best Foods in Varanasi", href: "/blogs/varanasi-food" },
+    ],
+  },
+  {
+    num: "03",
+    title: ["Culture & ", "Heritage"],
+    bg: false,
+    description:
+      "The living traditions that define a place — festivals, rituals, sacred spaces, and the unwritten rules that bind communities.",
+    gallery: ["Ganga aarti", "Temple", "Daily ritual"],
+    excerpt:
+      "As dusk paints the Varanasi sky in hues of orange and purple, Dashashwamedh Ghat transforms into a stage for the mesmerizing Ganga Aarti. The air buzzes with anticipation as priests, clad in vibrant silk robes, prepare for the ceremony.",
+    citationHref: "/blogs/varanasi",
+    articles: [
+      { label: "Varanasi — Ganga Aarti, Manikarnika & the Sacred Ghats", href: "/blogs/varanasi" },
+    ],
+  },
+  {
+    num: "04",
+    title: ["Craft & ", "Living History"],
+    bg: true,
+    description:
+      "The artisans, the looms, the hands that shape heritage. Stories that trace a craft from its mythological origins to the workshop floor today.",
+    gallery: ["The loom", "Weaver's hands", "The fabric"],
+    excerpt:
+      "A Banarasi saree is never merely worn. It is inherited, gifted, wept over, and remembered. The weavers of Varanasi don't make fabric — they make heirlooms. And in their looms, you can hear the rhythm of a tradition that has dressed gods, adorned royalty, and now drapes the shoulders of a woman walking into her own story.",
+    citationHref: "/blogs/banarasi-saree",
+    articles: [{ label: "The Banarasi Saree", href: "/blogs/banarasi-saree" }],
+  },
+];
+
+const skills = [
+  "Consumer Research (Nielsen)",
+  "Data & Insights",
+  "SEO & Content Strategy",
+  "Editorial Writing",
+  "Travel Photography",
+  "Cultural Research",
+  "Hindi · Bengali · English",
+];
+---
+<BaseLayout title="For Editors — Shunnoh" description="Immersive, research-rich travel writing for editors and publications." noindex={true}>
+  <div class="bg-ink text-parchment min-h-screen">
+    <!-- Hero -->
+    <header class="mx-auto max-w-4xl px-5 sm:px-8 pt-24 pb-16 sm:pt-32">
+      <span class="inline-block bg-terracotta text-warm-white font-ui text-[10px] uppercase tracking-[0.18em] px-3 py-1.5 rounded-sm">For Editors & Publications</span>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-[3.25rem] leading-tight mt-8 text-parchment">
+        I write the kind of travel stories readers <em class="italic text-terracotta">remember.</em>
+      </h1>
+      <p class="font-body text-xl sm:text-2xl text-stone-light mt-8 leading-relaxed max-w-2xl">
+        I'm Barnali, the writer behind Shunnoh. I specialise in immersive, research-rich travel features — the kind where a reader doesn't just learn about a place, they feel like they've been there. If your publication values depth, sensory detail, and cultural authenticity over listicles and SEO filler, we should talk.
+      </p>
+    </header>
+
+    <!-- Theme sections -->
+    {themes.map((t) => (
+      <ScrollReveal as="section" class={t.bg ? "bg-charcoal" : ""}>
+        <div class="mx-auto max-w-4xl px-5 sm:px-8 py-16 sm:py-20">
+          <div class="flex items-baseline gap-4">
+            <span class="font-display text-2xl text-terracotta/80">{t.num}</span>
+            <h2 class="font-display text-3xl sm:text-4xl text-parchment leading-snug">
+              {t.title[0]}<em class="italic text-terracotta">{t.title[1]}</em>
+            </h2>
+          </div>
+          <p class="font-body text-xl text-stone-light mt-5 max-w-2xl leading-relaxed">{t.description}</p>
+
+          <div class="grid grid-cols-3 gap-3 sm:gap-4 mt-8">
+            {t.gallery.map((label) => (
+              <div class="aspect-[3/4] rounded-sm bg-sand/20 border border-sand/15 flex items-end p-3">
+                <span class="font-ui text-[11px] uppercase tracking-wider text-stone-light/80">{label}</span>
+              </div>
+            ))}
+          </div>
+
+          <blockquote class="border-l-2 border-terracotta pl-5 sm:pl-6 mt-10">
+            <p class="font-body italic text-xl sm:text-2xl text-parchment/90 leading-relaxed">{t.excerpt}</p>
+            <a href={t.citationHref} class="font-ui text-xs uppercase tracking-wider text-terracotta hover:text-terracotta-deep mt-4 inline-block transition-colors">Read the full story →</a>
+          </blockquote>
+
+          <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+            {t.articles.map((a) => (
+              <li>
+                <a href={a.href} class="font-ui text-sm text-stone-light hover:text-parchment transition-colors">{a.label} <span class="text-stone">(Shunnoh)</span></a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </ScrollReveal>
+    ))}
+
+    <!-- Published Across -->
+    <ScrollReveal as="section" class="bg-charcoal">
+      <div class="mx-auto max-w-4xl px-5 sm:px-8 py-20 text-center">
+        <span class="font-ui text-[11px] uppercase tracking-[0.18em] text-stone">Published Across</span>
+        <h2 class="font-display text-3xl sm:text-4xl text-parchment mt-4">Work that's found its audience.</h2>
+        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mt-8 font-display italic text-lg text-stone-light">
+          <span>Outlook Traveller Eats</span>
+          <span class="text-stone/50">|</span>
+          <span>Shunnoh</span>
+          <span class="text-stone/50">|</span>
+          <span>More coming soon</span>
+        </div>
+      </div>
+    </ScrollReveal>
+
+    <!-- About Barnali -->
+    <ScrollReveal as="section">
+      <div class="mx-auto max-w-4xl px-5 sm:px-8 py-20 grid gap-10 md:grid-cols-[280px_1fr] md:gap-12 items-start">
+        <div class="aspect-[4/5] rounded-sm bg-sand/20 border border-sand/15 flex items-end p-4">
+          <span class="font-ui text-[11px] uppercase tracking-wider text-stone-light/80">Barnali — portrait</span>
+        </div>
+        <div>
+          <span class="font-ui text-[11px] uppercase tracking-[0.18em] text-stone">About the Writer</span>
+          <h2 class="font-display text-3xl sm:text-4xl text-parchment mt-4 leading-snug">
+            Research runs deep. The writing makes it <em class="italic text-terracotta">sing.</em>
+          </h2>
+          <div class="font-body text-xl text-stone-light mt-6 space-y-4 leading-relaxed">
+            <p>Before Shunnoh, I spent years in consumer research at Nielsen — learning how to ask the right questions, sit with messy data, and find the human story hiding inside a spreadsheet. That discipline never left me.</p>
+            <p>It's why my travel writing starts long before the trip: with history, etymology, the texture of a place's contradictions. By the time I arrive somewhere, I already know what I'm looking for — and I stay open to everything I didn't expect.</p>
+            <p>The result is travel writing that's both rigorous and felt. Pieces that hold up to a fact-check and still move you. Stories grounded in cultural research, not recycled from other listicles.</p>
+            <p>I write in English, and I think in Hindi and Bengali too — which means I can read a place in languages most travel writers can't.</p>
+          </div>
+          <ul class="mt-8 flex flex-wrap gap-2.5">
+            {skills.map((s) => (
+              <li class="font-ui text-xs text-stone-light border border-sand/30 rounded-full px-3.5 py-1.5">{s}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </ScrollReveal>
+
+    <!-- Contact -->
+    <ScrollReveal as="section" class="bg-charcoal">
+      <div class="mx-auto max-w-3xl px-5 sm:px-8 py-24 text-center">
+        <h2 class="font-display text-3xl sm:text-4xl text-parchment">
+          Interested in <em class="italic text-terracotta">working together?</em>
+        </h2>
+        <p class="font-body text-xl text-stone-light mt-5 leading-relaxed">
+          I take on a small number of commissions and collaborations each year. If you're an editor or publication looking for immersive travel features, I'd love to hear from you.
+        </p>
+        <p class="mt-8">
+          <a href="mailto:hello@shunnoh.com" class="font-display text-2xl text-terracotta hover:text-terracotta-deep transition-colors">hello@shunnoh.com</a>
+        </p>
+        <div class="flex items-center justify-center gap-6 mt-8 font-ui text-sm text-stone-light">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-parchment transition-colors">Instagram</a>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="hover:text-parchment transition-colors">Twitter / X</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-parchment transition-colors">LinkedIn</a>
+        </div>
+        <a href="/" class="inline-block mt-10 font-ui text-sm uppercase tracking-wider text-terracotta hover:text-terracotta-deep transition-colors">Explore Shunnoh →</a>
+      </div>
+    </ScrollReveal>
+
+    <Footer note="This page is shared privately with editors and publications." />
+  </div>
+</BaseLayout>

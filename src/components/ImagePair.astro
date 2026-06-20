@@ -1,0 +1,23 @@
+---
+// Renders 1+ images. Two side-by-side on desktop (stacked on mobile) is the
+// common case; a single image spans full width. A shared caption sits below.
+const { images = [], caption = "", alt = "" } = Astro.props;
+const single = images.length === 1;
+---
+<figure class="my-10">
+  <div class={single ? "" : "grid gap-4 sm:grid-cols-2"}>
+    {images.map((src, i) => (
+      <div class={`overflow-hidden rounded-sm bg-cream ${single ? "aspect-[3/2]" : "aspect-[4/3]"}`}>
+        <img
+          src={src}
+          alt={caption || alt || `Image ${i + 1}`}
+          loading="lazy"
+          class="h-full w-full object-cover transition-[filter] duration-300 hover:brightness-[1.03]"
+        />
+      </div>
+    ))}
+  </div>
+  {caption && (
+    <figcaption class="font-ui text-xs italic text-stone-light text-center mt-3">{caption}</figcaption>
+  )}
+</figure>

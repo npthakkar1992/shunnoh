@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import BlogCard from "../components/BlogCard.astro";
+import Gallery from "../components/Gallery.astro";
+import ScrollReveal from "../components/ScrollReveal.astro";
+import { blogCards } from "../data/blogCards";
+---
+<BaseLayout
+  title="Shunnoh — Experiential Travel Writing"
+  description="Personal tales of immersive travel, raw experiences, and unforgettable moments. Slow, sensory-rich storytelling by Barnali."
+>
+  <Nav current="home" />
+
+  <!-- Hero image -->
+  <div class="w-full aspect-[1400/650] max-h-[78vh] overflow-hidden bg-cream">
+    <img src="/images/hero/homepage-hero.jpg" alt="The ghats of Varanasi at dawn" class="h-full w-full object-cover" />
+  </div>
+
+  <!-- Intro -->
+  <ScrollReveal as="section" class="mx-auto max-w-2xl px-5 sm:px-8 text-center pt-20 pb-12">
+    <h1 class="font-display text-4xl sm:text-5xl text-ink leading-tight">Shunnoh, where you travel through words.</h1>
+    <div class="font-body text-xl text-stone mt-8 space-y-5 leading-relaxed text-left sm:text-center">
+      <p>Welcome to Shunnoh, a journey beyond the tourist trails and into the heart of experiential travel. I'm Barnali, a nomad seeking to truly live in the moment, amidst the chaos of digitalization. This blog is an invitation to slow down, and truly experience the places you travel, not just pass through them.</p>
+      <p>Shunnoh, meaning "zero" in Bengali, reflects the quiet solitude and Zen-like clarity found in exploration—the blank canvas for our travel stories. Join me as we delve deeper, exploring not just what to see, but how to feel, connect, and truly understand the places we visit. Let's embark on a journey of discovery, together.</p>
+    </div>
+  </ScrollReveal>
+
+  <!-- Discover -->
+  <ScrollReveal as="section" class="mx-auto max-w-2xl px-5 sm:px-8 text-center py-12">
+    <h2 class="font-display text-3xl sm:text-4xl text-ink">Discover Travel Stories</h2>
+    <p class="font-body text-xl text-stone mt-4 leading-relaxed">Personal tales of immersive travel, raw experiences, and unforgettable moments from my journey across destinations.</p>
+    <a
+      href="/blogs"
+      class="inline-block mt-8 rounded-full bg-terracotta px-7 py-3 font-ui text-sm uppercase tracking-wider text-warm-white hover:bg-terracotta-deep transition-colors"
+    >Read Stories</a>
+  </ScrollReveal>
+
+  <!-- Blog cards -->
+  <section class="mx-auto max-w-5xl px-5 sm:px-8 py-12 space-y-16 sm:space-y-20">
+    {blogCards.map((card, i) => (
+      <ScrollReveal>
+        <BlogCard
+          title={card.title}
+          subtitle={card.subtitle}
+          href={card.href}
+          imageSrc={card.imageSrc}
+          imageAlt={card.imageAlt}
+          flip={i % 2 === 1}
+        />
+      </ScrollReveal>
+    ))}
+  </section>
+
+  <!-- Gallery -->
+  <ScrollReveal as="section" class="py-16 sm:py-24">
+    <div class="mx-auto max-w-2xl px-5 sm:px-8 text-center mb-10">
+      <h2 class="font-display text-3xl sm:text-4xl text-ink">Gallery</h2>
+      <p class="font-body text-xl text-stone mt-4 leading-relaxed">Explore stunning travel moments captured in our recent blog posts.</p>
+    </div>
+    <Gallery />
+  </ScrollReveal>
+
+  <Footer />
+</BaseLayout>

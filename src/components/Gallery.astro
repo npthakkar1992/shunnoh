@@ -1,0 +1,30 @@
+---
+// 3 auto-scrolling marquee rows. Rows alternate direction. Images duplicated
+// inline so the -50% translate loops seamlessly.
+const rows = [
+  { dir: "marquee-left",  imgs: [1, 2, 3, 4] },
+  { dir: "marquee-right", imgs: [5, 6, 7, 8] },
+  { dir: "marquee-left",  imgs: [9, 10, 11, 12] },
+];
+const ext = (n) => (n === 6 || n === 7 ? "jpeg" : "jpg");
+const pad = (n) => String(n).padStart(2, "0");
+---
+<div class="space-y-4 overflow-hidden">
+  {rows.map((row) => (
+    <div class="marquee-row overflow-hidden">
+      <div class={`marquee-track ${row.dir} gap-4`}>
+        {[...row.imgs, ...row.imgs].map((n) => (
+          <div class="shrink-0 w-[280px] sm:w-[340px] aspect-[4/3] overflow-hidden bg-cream rounded-none">
+            <img
+              src={`/images/gallery/gallery-${pad(n)}.${ext(n)}`}
+              alt=""
+              loading="lazy"
+              aria-hidden="true"
+              class="h-full w-full object-cover"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>

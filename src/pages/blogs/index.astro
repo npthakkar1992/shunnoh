@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import ScrollReveal from "../../components/ScrollReveal.astro";
+import { blogCards } from "../../data/blogCards";
+---
+<BaseLayout title="Stories — Shunnoh" description="Immersive travel stories from Varanasi, Goa, and beyond.">
+  <Nav current="blogs" />
+
+  <!-- Header -->
+  <section class="bg-parchment">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8 text-center py-20 sm:py-28">
+      <h1 class="font-display text-5xl sm:text-6xl text-ink">Blogs</h1>
+      <p class="font-body text-xl text-stone mt-6 leading-relaxed">
+        Explore travel through a different lens—where the journey matters as much as the destination. Shunnoh is a space for slow, meaningful exploration, uncovering the soul of every place beyond the tourist map. From hidden gems to transformative experiences, each story here is an invitation to connect, feel, and truly belong wherever you wander.
+      </p>
+    </div>
+  </section>
+
+  <!-- Blog cards -->
+  <section class="mx-auto max-w-5xl px-5 sm:px-8 py-16 space-y-16 sm:space-y-20">
+    {blogCards.map((card, i) => (
+      <ScrollReveal>
+        <BlogCard
+          title={card.title}
+          subtitle={card.subtitle}
+          href={card.href}
+          imageSrc={card.imageSrc}
+          imageAlt={card.imageAlt}
+          flip={i % 2 === 1}
+        />
+      </ScrollReveal>
+    ))}
+  </section>
+
+  <Footer />
+</BaseLayout>

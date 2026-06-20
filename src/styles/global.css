@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Shunnoh v2 Design System — Tailwind v4 @theme tokens
+   (Mirrors the tokens specified in CLAUDE.md)
+   ============================================================ */
+@theme {
+  /* Colors — warm palette, no pure #fff / #000 */
+  --color-warm-white: #faf8f4;
+  --color-parchment: #f5f0e8;
+  --color-cream: #ede6d8;
+  --color-sand: #d4c5a9;
+  --color-charcoal: #2d2a26;
+  --color-ink: #1a1714;
+  --color-stone: #8a8175;
+  --color-stone-light: #b0a89c;
+  --color-terracotta: #b8704b;
+  --color-terracotta-deep: #9a5a38;
+  --color-moss: #4a5d4a;
+
+  /* Font families */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Cormorant Garamond", Georgia, serif;
+  --font-ui: "DM Sans", sans-serif;
+}
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--color-warm-white);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- Marquee gallery ---------- */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.marquee-left  { animation: marquee-left  40s linear infinite; }
+.marquee-right { animation: marquee-right 40s linear infinite; }
+.marquee-row:hover .marquee-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-left, .marquee-right { animation: none; }
+}
+
+/* ---------- Utility: read-more arrow nudge ---------- */
+.read-more .arrow {
+  display: inline-block;
+  transition: transform 250ms ease-out;
+}
+.read-more:hover .arrow {
+  transform: translateX(3px);
+}

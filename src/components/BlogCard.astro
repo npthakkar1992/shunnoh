@@ -1,0 +1,24 @@
+---
+const { title, subtitle, href, imageSrc, imageAlt, flip = false } = Astro.props;
+---
+<a
+  href={href}
+  class={`read-more group grid items-center gap-6 sm:gap-10 md:grid-cols-2 ${flip ? "md:[&>*:first-child]:order-2" : ""}`}
+>
+  <div class="overflow-hidden rounded-sm bg-cream aspect-[16/10]">
+    <img
+      src={imageSrc}
+      alt={imageAlt}
+      loading="lazy"
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+    />
+  </div>
+
+  <div class="md:px-2">
+    <h3 class="font-display text-2xl sm:text-3xl text-ink leading-snug">{title}</h3>
+    <p class="font-body text-lg sm:text-xl text-stone mt-3 leading-relaxed">{subtitle}</p>
+    <span class="inline-flex items-center gap-1.5 font-ui text-xs uppercase tracking-wider text-terracotta group-hover:text-terracotta-deep mt-5 transition-colors">
+      Read Story <span class="arrow">→</span>
+    </span>
+  </div>
+</a>

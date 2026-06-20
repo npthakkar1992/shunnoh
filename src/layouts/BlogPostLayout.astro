@@ -1,0 +1,45 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+const { title, subtitle, meta, hero, seoTitle, seoDescription } = Astro.props;
+---
+<BaseLayout title={seoTitle ?? `${title} — Shunnoh`} description={seoDescription ?? subtitle}>
+  <Nav current="blogs" />
+
+  <!-- Hero -->
+  <div class="w-full aspect-[21/9] sm:aspect-[21/8] overflow-hidden bg-cream">
+    <img src={hero} alt={title} class="h-full w-full object-cover" />
+  </div>
+
+  <!-- Header -->
+  <header class="mx-auto max-w-3xl px-5 sm:px-8 text-center pt-12 sm:pt-16 pb-8">
+    <h1 class="font-display text-4xl sm:text-5xl text-ink leading-tight">{title}</h1>
+    <p class="font-body italic text-xl sm:text-2xl text-stone mt-4 leading-relaxed">{subtitle}</p>
+    <p class="font-ui text-xs uppercase tracking-wider text-stone-light mt-5">{meta}</p>
+  </header>
+
+  <!-- Body -->
+  <article class="mx-auto max-w-3xl px-5 sm:px-8 pb-8">
+    <slot />
+  </article>
+
+  <!-- Comments (styled placeholder; wired up later) -->
+  <section class="mx-auto max-w-3xl px-5 sm:px-8 pt-10 pb-16 border-t border-sand/50 mt-8">
+    <h2 class="font-display text-2xl text-ink">Comments</h2>
+    <form class="mt-6 flex flex-col gap-4" onsubmit="return false;">
+      <textarea
+        rows="3"
+        placeholder="Share your thoughts…"
+        class="w-full rounded-sm border border-sand bg-warm-white px-4 py-3 font-body text-lg text-ink placeholder:text-stone-light focus:outline-none focus:border-terracotta"
+      ></textarea>
+      <button
+        type="submit"
+        class="self-start rounded-full bg-terracotta px-6 py-2.5 font-ui text-sm uppercase tracking-wider text-warm-white hover:bg-terracotta-deep transition-colors"
+      >Publish</button>
+    </form>
+  </section>
+
+  <Footer />
+</BaseLayout>
