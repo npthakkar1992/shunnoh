@@ -85,3 +85,73 @@ body {
 .read-more:hover .arrow {
   transform: translateX(3px);
 }
+
+/* ---------- Nav link underline slide-in ---------- */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 300ms ease;
+}
+.nav-underline:hover::after {
+  width: 100%;
+}
+
+/* ---------- Paper texture overlay (for-editors) ---------- */
+.paper-texture::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Hero staggered fade-up (for-editors) ---------- */
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeUp 0.8s ease forwards;
+}
+.fade-up-1 { animation-delay: 0.2s; }
+.fade-up-2 { animation-delay: 0.4s; }
+.fade-up-3 { animation-delay: 0.6s; }
+@media (prefers-reduced-motion: reduce) {
+  .fade-up { opacity: 1; transform: none; animation: none; }
+}
+
+/* ---------- Reveal stagger delays ---------- */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ---------- Blog post body typography ---------- */
+.post-body p {
+  font-family: var(--font-body);
+  font-size: 1.2rem;          /* ~19px reading size for Cormorant */
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--color-stone);
+  margin-bottom: 1.5rem;
+}
+.post-body h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;          /* ~28px */
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-ink);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+.post-body figure { margin-top: 2.5rem; margin-bottom: 2.5rem; }

@@ -1,188 +1,402 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Footer from "../components/Footer.astro";
-import ScrollReveal from "../components/ScrollReveal.astro";
 
-const themes = [
-  {
-    num: "01",
-    title: ["Experiential Travel & ", "Immersive Writing"],
-    bg: false,
-    description:
-      "Writing that puts the reader inside the moment — not observing a place, but feeling its temperature, hearing its rhythm, smelling its streets.",
-    gallery: ["Ghats at dawn", "Street scene", "On the water"],
-    excerpt:
-      "The ghats of Varanasi do not greet you — they confront you. Before your feet find the first wet step, the city has already decided what it will show you: the smoke that curls upward carrying someone's last prayer, the marigold garlands sinking slowly into water that has held ten thousand years of faith.",
-    citationHref: "/blogs/varanasi",
-    articles: [
-      { label: "Varanasi", href: "/blogs/varanasi" },
-      { label: "Goa's Glowing Forest", href: "/blogs/goa" },
-    ],
-  },
-  {
-    num: "02",
-    title: ["Destination ", "Stories"],
-    bg: true,
-    description:
-      "Places told through their people, their food, their rituals. Not travel guides — travel stories.",
-    gallery: ["Sarnath", "Varanasi food", "Goa forest"],
-    excerpt:
-      "Stepping off the plane, I noticed a fellow passenger, an older gentleman, pause. The moment his foot touched the ground, he set his luggage aside and, with a reverent bow, touched his forehead to the cold tarmac — a silent, heartfelt greeting to the sacred city.",
-    citationHref: "/blogs/varanasi",
-    articles: [
-      { label: "Sarnath", href: "/blogs/sarnath" },
-      { label: "Best Foods in Varanasi", href: "/blogs/varanasi-food" },
-    ],
-  },
-  {
-    num: "03",
-    title: ["Culture & ", "Heritage"],
-    bg: false,
-    description:
-      "The living traditions that define a place — festivals, rituals, sacred spaces, and the unwritten rules that bind communities.",
-    gallery: ["Ganga aarti", "Temple", "Daily ritual"],
-    excerpt:
-      "As dusk paints the Varanasi sky in hues of orange and purple, Dashashwamedh Ghat transforms into a stage for the mesmerizing Ganga Aarti. The air buzzes with anticipation as priests, clad in vibrant silk robes, prepare for the ceremony.",
-    citationHref: "/blogs/varanasi",
-    articles: [
-      { label: "Varanasi — Ganga Aarti, Manikarnika & the Sacred Ghats", href: "/blogs/varanasi" },
-    ],
-  },
-  {
-    num: "04",
-    title: ["Craft & ", "Living History"],
-    bg: true,
-    description:
-      "The artisans, the looms, the hands that shape heritage. Stories that trace a craft from its mythological origins to the workshop floor today.",
-    gallery: ["The loom", "Weaver's hands", "The fabric"],
-    excerpt:
-      "A Banarasi saree is never merely worn. It is inherited, gifted, wept over, and remembered. The weavers of Varanasi don't make fabric — they make heirlooms. And in their looms, you can hear the rhythm of a tradition that has dressed gods, adorned royalty, and now drapes the shoulders of a woman walking into her own story.",
-    citationHref: "/blogs/banarasi-saree",
-    articles: [{ label: "The Banarasi Saree", href: "/blogs/banarasi-saree" }],
-  },
+const beats = [
+  "Experiential Travel", "Slow Travel", "Cultural Heritage", "Artisan Craft",
+  "Sacred Spaces", "Food & Culinary Traditions", "History & Architecture",
+  "Offbeat Destinations", "Sustainability in Travel", "Travel Photography",
 ];
 
-const skills = [
-  "Consumer Research (Nielsen)",
-  "Data & Insights",
-  "SEO & Content Strategy",
-  "Editorial Writing",
-  "Travel Photography",
-  "Cultural Research",
-  "Hindi · Bengali · English",
+const clips = [
+  { title: "Varanasi", sub: "Here, you either find Him, or you lose faith in Him.", type: "Destination Feature", pub: "Shunnoh", href: "/blogs/varanasi" },
+  { title: "The Banarasi Saree", sub: "A weave that traversed from the Gods to the masses through the royals.", type: "Cultural Deep-Dive", pub: "Shunnoh", href: "/blogs/banarasi-saree" },
+  { title: "Sarnath", sub: "Where the Wheel of Dharma was turned.", type: "Destination Feature", pub: "Shunnoh", href: "/blogs/sarnath" },
+  { title: "Goa's Glowing Forest", sub: "The monsoon treat — bioluminescence in the Western Ghats.", type: "Nature & Travel", pub: "Shunnoh", href: "/blogs/goa" },
+  { title: "Best Foods in Varanasi", sub: "Your guide to iconic local flavours.", type: "Food & Culture", pub: "Shunnoh", href: "/blogs/varanasi-food" },
+];
+
+const unpublished = [
+  { type: "Destination Feature", title: "Title of Unpublished Piece", desc: "A one-line description — the hook that makes an editor want to read more.", status: "ready", statusLabel: "Ready for publication" },
+  { type: "Cultural Deep-Dive", title: "Title of Unpublished Piece", desc: "A one-line description — the hook that makes an editor want to read more.", status: "ready", statusLabel: "Ready for publication" },
+  { type: "Travel Essay", title: "Title of Unpublished Piece", desc: "A one-line description of the piece.", status: "draft", statusLabel: "In progress — draft available" },
+  { type: "Food & Heritage", title: "Title of Unpublished Piece", desc: "A one-line description of the piece.", status: "draft", statusLabel: "In progress — draft available" },
 ];
 ---
-<BaseLayout title="For Editors — Shunnoh" description="Immersive, research-rich travel writing for editors and publications." noindex={true}>
-  <div class="bg-ink text-parchment min-h-screen">
-    <!-- Hero -->
-    <header class="mx-auto max-w-4xl px-5 sm:px-8 pt-24 pb-16 sm:pt-32">
-      <span class="inline-block bg-terracotta text-warm-white font-ui text-[10px] uppercase tracking-[0.18em] px-3 py-1.5 rounded-sm">For Editors & Publications</span>
-      <h1 class="font-display text-4xl sm:text-5xl lg:text-[3.25rem] leading-tight mt-8 text-parchment">
-        I write the kind of travel stories readers <em class="italic text-terracotta">remember.</em>
-      </h1>
-      <p class="font-body text-xl sm:text-2xl text-stone-light mt-8 leading-relaxed max-w-2xl">
-        I'm Barnali, the writer behind Shunnoh. I specialise in immersive, research-rich travel features — the kind where a reader doesn't just learn about a place, they feel like they've been there. If your publication values depth, sensory detail, and cultural authenticity over listicles and SEO filler, we should talk.
-      </p>
-    </header>
+<BaseLayout title="For Editors — Shunnoh" description="Barnali's editorial portfolio — immersive travel writing, cultural features, and destination storytelling for publications." noindex={true}>
+  <div class="editor-page paper-texture">
+    <!-- NAV (frosted) -->
+    <nav class="ed-nav">
+      <a href="/" class="ed-nav-logo">Shunnoh</a>
+      <ul class="ed-nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blogs">Blog</a></li>
+        <li><a href="#contact">Get in Touch</a></li>
+      </ul>
+    </nav>
 
-    <!-- Theme sections -->
-    {themes.map((t) => (
-      <ScrollReveal as="section" class={t.bg ? "bg-charcoal" : ""}>
-        <div class="mx-auto max-w-4xl px-5 sm:px-8 py-16 sm:py-20">
-          <div class="flex items-baseline gap-4">
-            <span class="font-display text-2xl text-terracotta/80">{t.num}</span>
-            <h2 class="font-display text-3xl sm:text-4xl text-parchment leading-snug">
-              {t.title[0]}<em class="italic text-terracotta">{t.title[1]}</em>
-            </h2>
-          </div>
-          <p class="font-body text-xl text-stone-light mt-5 max-w-2xl leading-relaxed">{t.description}</p>
+    <!-- HERO -->
+    <section class="editor-hero">
+      <div class="editor-hero-badge fade-up fade-up-1">For Editors &amp; Publications</div>
+      <h1 class="fade-up fade-up-2">I write the kind of travel stories readers <em>remember.</em></h1>
+      <p class="editor-hero-intro fade-up fade-up-3">I'm Barnali, the writer behind Shunnoh. I specialise in immersive, research-rich travel features — the kind where a reader doesn't just learn about a place, they feel like they've been there. If your publication values depth, sensory detail, and cultural authenticity over listicles and SEO filler, we should talk.</p>
+    </section>
 
-          <div class="grid grid-cols-3 gap-3 sm:gap-4 mt-8">
-            {t.gallery.map((label) => (
-              <div class="aspect-[3/4] rounded-sm bg-sand/20 border border-sand/15 flex items-end p-3">
-                <span class="font-ui text-[11px] uppercase tracking-wider text-stone-light/80">{label}</span>
+    <!-- BIO STRIP -->
+    <div class="bio-strip reveal">
+      <div class="bio-strip-photo"><div class="placeholder-indicator" style="font-size:0.45rem;">Headshot</div></div>
+      <div class="bio-strip-text">
+        <div><p class="bio-detail-label">Based In</p><p class="bio-detail-value">India</p></div>
+        <div><p class="bio-detail-label">Beats</p><p class="bio-detail-value">Travel, Culture, Heritage, Food</p></div>
+        <div><p class="bio-detail-label">Languages</p><p class="bio-detail-value">English, Hindi, Bengali</p></div>
+      </div>
+    </div>
+
+    <!-- BEATS -->
+    <section class="beats reveal">
+      <div class="section-label">Areas of Expertise</div>
+      <h2 class="section-heading">What I write about.</h2>
+      <div class="beats-grid">
+        {beats.map((b) => <span class="beat-tag">{b}</span>)}
+      </div>
+    </section>
+
+    <!-- SAMPLE EXCERPT -->
+    <section class="sample-excerpt reveal">
+      <div class="sample-excerpt-inner">
+        <div class="section-label">A Taste of the Writing</div>
+        <blockquote>A Banarasi saree is never merely worn. It is inherited, gifted, wept over, and remembered. The weavers of Varanasi don't make fabric — they make heirlooms. And in their looms, you can hear the rhythm of a tradition that has dressed gods, adorned royalty, and now drapes the shoulders of a woman walking into her own story.</blockquote>
+        <cite>— from <a href="/blogs/banarasi-saree">The Banarasi Saree</a>, published on Shunnoh</cite>
+      </div>
+    </section>
+
+    <!-- PUBLISHED CLIPS -->
+    <section class="clips reveal">
+      <div class="section-label">Published Work</div>
+      <h2 class="section-heading">Selected clips.</h2>
+      <ul class="clips-list">
+        {clips.map((c) => (
+          <li>
+            <a href={c.href} class="clip-item">
+              <div>
+                <p class="clip-title">{c.title}</p>
+                <p class="clip-subtitle">{c.sub}</p>
               </div>
-            ))}
+              <div class="clip-meta">
+                <p class="clip-type">{c.type}</p>
+                <p class="clip-pub">{c.pub}</p>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- UNPUBLISHED / EXCLUSIVE -->
+    <section class="unpublished" id="exclusive">
+      <div class="section-label reveal">Unpublished &amp; In-Progress</div>
+      <h2 class="section-heading reveal reveal-delay-1">Work available for commissioning or first publication.</h2>
+      <p class="unpublished-intro reveal reveal-delay-2">These are stories I've written or am currently developing — available for publications looking for ready-to-run or near-complete features. Each can be adapted to your editorial voice and format.</p>
+      <div class="unpublished-grid">
+        {unpublished.map((u, i) => (
+          <a href="#contact" class={`unpub-card reveal ${i > 0 ? `reveal-delay-${Math.min(i, 3)}` : ""}`}>
+            <p class="unpub-card-type">{u.type}</p>
+            <h3>{u.title}</h3>
+            <p>{u.desc}</p>
+            <span class={`unpub-status ${u.status}`}>{u.statusLabel}</span>
+          </a>
+        ))}
+      </div>
+      <p class="unpublished-note reveal">These pieces are shared in confidence with editors considering Shunnoh for commission or contribution. For full drafts, please <a href="mailto:hello@shunnoh.com">get in touch</a>.</p>
+    </section>
+
+    <!-- PHOTO STRIP -->
+    <div class="photo-strip">
+      {[1,2,3,4].map((n) => (
+        <div class="photo-strip-item">
+          <div class="placeholder-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo {n}</span>
           </div>
-
-          <blockquote class="border-l-2 border-terracotta pl-5 sm:pl-6 mt-10">
-            <p class="font-body italic text-xl sm:text-2xl text-parchment/90 leading-relaxed">{t.excerpt}</p>
-            <a href={t.citationHref} class="font-ui text-xs uppercase tracking-wider text-terracotta hover:text-terracotta-deep mt-4 inline-block transition-colors">Read the full story →</a>
-          </blockquote>
-
-          <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-            {t.articles.map((a) => (
-              <li>
-                <a href={a.href} class="font-ui text-sm text-stone-light hover:text-parchment transition-colors">{a.label} <span class="text-stone">(Shunnoh)</span></a>
-              </li>
-            ))}
-          </ul>
         </div>
-      </ScrollReveal>
-    ))}
+      ))}
+    </div>
 
-    <!-- Published Across -->
-    <ScrollReveal as="section" class="bg-charcoal">
-      <div class="mx-auto max-w-4xl px-5 sm:px-8 py-20 text-center">
-        <span class="font-ui text-[11px] uppercase tracking-[0.18em] text-stone">Published Across</span>
-        <h2 class="font-display text-3xl sm:text-4xl text-parchment mt-4">Work that's found its audience.</h2>
-        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mt-8 font-display italic text-lg text-stone-light">
-          <span>Outlook Traveller Eats</span>
-          <span class="text-stone/50">|</span>
-          <span>Shunnoh</span>
-          <span class="text-stone/50">|</span>
-          <span>More coming soon</span>
-        </div>
+    <!-- CONTACT -->
+    <section class="editor-contact" id="contact">
+      <h2 class="reveal">Interested in <em>working together?</em></h2>
+      <p class="editor-contact-sub reveal reveal-delay-1">I'm open to commissions, contributor roles, and editorial collaborations. Happy to discuss rates, adapt to your house style, or send full drafts of any unpublished piece.</p>
+      <a href="mailto:hello@shunnoh.com" class="editor-contact-email reveal reveal-delay-2">hello@shunnoh.com</a>
+      <div class="editor-contact-links reveal reveal-delay-2">
+        <a href="https://www.instagram.com/shunnoh_" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://x.com/shunnoh_blog" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+        <a href="https://www.linkedin.com/in/barnali" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
-    </ScrollReveal>
-
-    <!-- About Barnali -->
-    <ScrollReveal as="section">
-      <div class="mx-auto max-w-4xl px-5 sm:px-8 py-20 grid gap-10 md:grid-cols-[280px_1fr] md:gap-12 items-start">
-        <div class="aspect-[4/5] rounded-sm bg-sand/20 border border-sand/15 flex items-end p-4">
-          <span class="font-ui text-[11px] uppercase tracking-wider text-stone-light/80">Barnali — portrait</span>
-        </div>
-        <div>
-          <span class="font-ui text-[11px] uppercase tracking-[0.18em] text-stone">About the Writer</span>
-          <h2 class="font-display text-3xl sm:text-4xl text-parchment mt-4 leading-snug">
-            Research runs deep. The writing makes it <em class="italic text-terracotta">sing.</em>
-          </h2>
-          <div class="font-body text-xl text-stone-light mt-6 space-y-4 leading-relaxed">
-            <p>Before Shunnoh, I spent years in consumer research at Nielsen — learning how to ask the right questions, sit with messy data, and find the human story hiding inside a spreadsheet. That discipline never left me.</p>
-            <p>It's why my travel writing starts long before the trip: with history, etymology, the texture of a place's contradictions. By the time I arrive somewhere, I already know what I'm looking for — and I stay open to everything I didn't expect.</p>
-            <p>The result is travel writing that's both rigorous and felt. Pieces that hold up to a fact-check and still move you. Stories grounded in cultural research, not recycled from other listicles.</p>
-            <p>I write in English, and I think in Hindi and Bengali too — which means I can read a place in languages most travel writers can't.</p>
-          </div>
-          <ul class="mt-8 flex flex-wrap gap-2.5">
-            {skills.map((s) => (
-              <li class="font-ui text-xs text-stone-light border border-sand/30 rounded-full px-3.5 py-1.5">{s}</li>
-            ))}
-          </ul>
-        </div>
+      <div class="editor-cta-explore reveal reveal-delay-3">
+        <a href="/">Explore Shunnoh
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
-    </ScrollReveal>
+    </section>
 
-    <!-- Contact -->
-    <ScrollReveal as="section" class="bg-charcoal">
-      <div class="mx-auto max-w-3xl px-5 sm:px-8 py-24 text-center">
-        <h2 class="font-display text-3xl sm:text-4xl text-parchment">
-          Interested in <em class="italic text-terracotta">working together?</em>
-        </h2>
-        <p class="font-body text-xl text-stone-light mt-5 leading-relaxed">
-          I take on a small number of commissions and collaborations each year. If you're an editor or publication looking for immersive travel features, I'd love to hear from you.
-        </p>
-        <p class="mt-8">
-          <a href="mailto:hello@shunnoh.com" class="font-display text-2xl text-terracotta hover:text-terracotta-deep transition-colors">hello@shunnoh.com</a>
-        </p>
-        <div class="flex items-center justify-center gap-6 mt-8 font-ui text-sm text-stone-light">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-parchment transition-colors">Instagram</a>
-          <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="hover:text-parchment transition-colors">Twitter / X</a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-parchment transition-colors">LinkedIn</a>
-        </div>
-        <a href="/" class="inline-block mt-10 font-ui text-sm uppercase tracking-wider text-terracotta hover:text-terracotta-deep transition-colors">Explore Shunnoh →</a>
-      </div>
-    </ScrollReveal>
-
-    <Footer note="This page is shared privately with editors and publications." />
+    <!-- FOOTER -->
+    <footer class="ed-footer">
+      <p>&copy; 2026 Shunnoh. All rights reserved.</p>
+      <p>This page is shared privately with editors and publications.</p>
+    </footer>
   </div>
 </BaseLayout>
+
+<style>
+  .editor-page {
+    --ink: #1a1714;
+    --parchment: #f5f0e8;
+    --warm-white: #faf8f4;
+    --sand: #d4c5a9;
+    --terracotta: #b8704b;
+    --terracotta-deep: #9a5a38;
+    --moss-light: #6b7f6b;
+    --stone: #8a8175;
+    --stone-light: #b0a89c;
+    --cream: #ede6d8;
+    --charcoal: #2d2a26;
+    --font-display: "Playfair Display", Georgia, serif;
+    --font-body: "DM Sans", "Helvetica Neue", sans-serif;
+    --font-accent: "Cormorant Garamond", Georgia, serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  .ed-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 1.25rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250, 248, 244, 0.92);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 rgba(26, 23, 20, 0.06);
+  }
+  .ed-nav-logo {
+    font-family: var(--font-display); font-size: 1.4rem; font-weight: 500;
+    color: var(--ink); text-decoration: none; letter-spacing: 0.02em;
+  }
+  .ed-nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
+  .ed-nav-links a {
+    font-family: var(--font-body); font-size: 0.82rem; font-weight: 400;
+    color: var(--stone); text-decoration: none; letter-spacing: 0.08em;
+    text-transform: uppercase; transition: color 0.3s ease; position: relative;
+  }
+  .ed-nav-links a:hover { color: var(--terracotta); }
+  .ed-nav-links a::after {
+    content: ""; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px; background: currentColor; transition: width 0.3s ease;
+  }
+  .ed-nav-links a:hover::after { width: 100%; }
+
+  /* HERO */
+  .editor-hero { padding: 10rem 6rem 5rem; max-width: 900px; }
+  .editor-hero-badge {
+    display: inline-block; font-family: var(--font-body); font-size: 0.65rem;
+    font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--warm-white); background: var(--terracotta);
+    padding: 0.4rem 1rem; margin-bottom: 2.5rem;
+  }
+  .editor-hero h1 {
+    font-family: var(--font-display); font-size: clamp(2.4rem, 4.5vw, 3.5rem);
+    font-weight: 400; line-height: 1.2; color: var(--ink);
+    margin-bottom: 2rem; letter-spacing: -0.01em;
+  }
+  .editor-hero h1 em { font-style: italic; color: var(--terracotta); }
+  .editor-hero-intro {
+    font-family: var(--font-accent); font-size: 1.25rem; font-weight: 300;
+    line-height: 1.85; color: var(--charcoal); max-width: 680px;
+  }
+
+  /* BIO STRIP */
+  .bio-strip {
+    padding: 3rem 6rem; background: var(--parchment);
+    display: grid; grid-template-columns: auto 1fr; gap: 3rem; align-items: center;
+    border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand);
+  }
+  .bio-strip-photo {
+    width: 100px; height: 100px; border-radius: 50%; background: var(--cream);
+    overflow: hidden; flex-shrink: 0; position: relative;
+  }
+  .bio-strip-photo .placeholder-indicator {
+    position: absolute; inset: 0; display: flex; align-items: center;
+    justify-content: center; background: var(--cream); color: var(--stone);
+    font-size: 0.5rem; text-align: center; padding: 0.5rem;
+  }
+  .bio-strip-text { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+  .bio-detail-label {
+    font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--stone); margin-bottom: 0.35rem;
+  }
+  .bio-detail-value { font-family: var(--font-display); font-size: 1rem; color: var(--ink); line-height: 1.5; }
+
+  /* SECTION SHARED */
+  .editor-page section { padding: 5rem 6rem; }
+  .section-label {
+    font-family: var(--font-body); font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: 2rem; display: flex; align-items: center; gap: 1.5rem;
+  }
+  .section-label::before { content: ""; width: 40px; height: 1px; background: var(--terracotta); }
+  .section-heading {
+    font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 400; line-height: 1.3; color: var(--ink); margin-bottom: 1.5rem;
+  }
+
+  /* BEATS */
+  .beats { background: var(--warm-white); }
+  .beats-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+  .beat-tag {
+    font-family: var(--font-body); font-size: 0.8rem; font-weight: 400;
+    color: var(--charcoal); padding: 0.6rem 1.4rem; border: 1px solid var(--sand);
+    background: var(--parchment); transition: all 0.3s ease;
+  }
+  .beat-tag:hover { background: var(--terracotta); color: var(--warm-white); border-color: var(--terracotta); }
+
+  /* SAMPLE EXCERPT */
+  .sample-excerpt { background: var(--warm-white); padding: 6rem; position: relative; }
+  .sample-excerpt::before {
+    content: "\201C"; position: absolute; top: 1rem; left: 3rem;
+    font-family: var(--font-display); font-size: 15rem; color: rgba(26,23,20,0.03); line-height: 1;
+  }
+  .sample-excerpt-inner { max-width: 750px; margin: 0 auto; }
+  .sample-excerpt blockquote {
+    font-family: var(--font-accent); font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    font-weight: 300; font-style: italic; line-height: 1.9; color: var(--charcoal); margin-bottom: 1.5rem;
+  }
+  .sample-excerpt cite { font-family: var(--font-body); font-size: 0.78rem; font-style: normal; color: var(--stone); letter-spacing: 0.05em; }
+  .sample-excerpt cite a { color: var(--terracotta); text-decoration: none; }
+
+  /* CLIPS */
+  .clips { background: var(--parchment); }
+  .clips-list { margin-top: 2.5rem; list-style: none; padding: 0; }
+  .clip-item {
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: baseline;
+    padding: 1.75rem 0; border-bottom: 1px solid rgba(212,197,169,0.5);
+    text-decoration: none; color: inherit; transition: all 0.3s ease;
+  }
+  .clips-list li:first-child .clip-item { border-top: 1px solid rgba(212,197,169,0.5); }
+  .clip-item:hover { padding-left: 1rem; }
+  .clip-item:hover .clip-title, .clip-item:hover .clip-subtitle,
+  .clip-item:hover .clip-type, .clip-item:hover .clip-pub { color: var(--terracotta); }
+  .clip-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; color: var(--ink); margin-bottom: 0.35rem; line-height: 1.35; transition: color 0.3s ease; }
+  .clip-subtitle { font-family: var(--font-accent); font-size: 1rem; font-style: italic; color: var(--stone); transition: color 0.3s ease; }
+  .clip-meta { text-align: right; flex-shrink: 0; }
+  .clip-type { font-family: var(--font-body); font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.25rem; transition: color 0.3s ease; }
+  .clip-pub { font-family: var(--font-body); font-size: 0.78rem; color: var(--stone); transition: color 0.3s ease; }
+
+  /* UNPUBLISHED */
+  .unpublished { background: var(--charcoal); padding: 5rem 6rem; }
+  .unpublished .section-label { color: var(--sand); }
+  .unpublished .section-label::before { background: var(--sand); }
+  .unpublished .section-heading { color: var(--warm-white); }
+  .unpublished-intro { font-family: var(--font-accent); font-size: 1.1rem; font-weight: 300; line-height: 1.8; color: rgba(255,255,255,0.6); max-width: 650px; margin-bottom: 3rem; }
+  .unpublished-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .unpub-card {
+    padding: 2rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);
+    transition: all 0.4s ease; text-decoration: none; color: inherit; display: block;
+  }
+  .unpub-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+  .unpub-card-type { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 0.75rem; }
+  .unpub-card h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; color: var(--warm-white); margin-bottom: 0.5rem; line-height: 1.35; }
+  .unpub-card p { font-family: var(--font-accent); font-size: 0.95rem; font-style: italic; color: rgba(255,255,255,0.45); line-height: 1.6; }
+  .unpub-status { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-body); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moss-light); margin-top: 1rem; }
+  .unpub-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--moss-light); }
+  .unpub-status.draft { color: var(--sand); }
+  .unpub-status.draft::before { background: var(--sand); }
+  .unpublished-note { font-family: var(--font-body); font-size: 0.82rem; color: rgba(255,255,255,0.35); margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); line-height: 1.7; }
+  .unpublished-note a { color: var(--sand); text-decoration: none; border-bottom: 1px solid rgba(212,197,169,0.3); }
+
+  /* PHOTO STRIP */
+  .photo-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: var(--ink); }
+  .photo-strip-item { aspect-ratio: 1; background: var(--charcoal); overflow: hidden; position: relative; }
+  .photo-strip-item .placeholder-indicator {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.35rem; background: var(--charcoal); color: var(--stone);
+    font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .photo-strip-item .placeholder-indicator svg { width: 24px; height: 24px; stroke: var(--stone); }
+
+  /* CONTACT */
+  .editor-contact { padding: 6rem; text-align: center; background: var(--parchment); }
+  .editor-contact h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; color: var(--ink); margin-bottom: 1rem; }
+  .editor-contact h2 em { font-style: italic; color: var(--terracotta); }
+  .editor-contact-sub { font-family: var(--font-accent); font-size: 1.1rem; font-weight: 300; color: var(--stone); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
+  .editor-contact-email {
+    display: inline-block; font-family: var(--font-display); font-size: 1.3rem; color: var(--ink);
+    text-decoration: none; border-bottom: 1px solid var(--sand); padding-bottom: 0.25rem; transition: border-color 0.3s ease;
+  }
+  .editor-contact-email:hover { border-color: var(--terracotta); }
+  .editor-contact-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
+  .editor-contact-links a { font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  .editor-contact-links a:hover { color: var(--terracotta); }
+  .editor-cta-explore { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--sand); }
+  .editor-cta-explore a {
+    display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-body);
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta);
+    text-decoration: none; transition: gap 0.3s ease;
+  }
+  .editor-cta-explore a:hover { gap: 1rem; }
+  .editor-cta-explore svg { width: 16px; height: 16px; }
+
+  /* FOOTER */
+  .ed-footer { background: var(--ink); padding: 2rem 6rem; display: flex; justify-content: space-between; align-items: center; }
+  .ed-footer p { font-family: var(--font-body); font-size: 0.72rem; color: var(--stone); letter-spacing: 0.05em; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .editor-page section, .unpublished, .editor-hero, .sample-excerpt, .editor-contact { padding-left: 3rem; padding-right: 3rem; }
+    .bio-strip { padding: 2.5rem 3rem; grid-template-columns: 1fr; }
+    .bio-strip-photo { margin: 0 auto; }
+    .bio-strip-text { grid-template-columns: 1fr 1fr; text-align: center; }
+    .unpublished-grid { grid-template-columns: 1fr; }
+    .photo-strip { grid-template-columns: repeat(2, 1fr); }
+    .ed-nav { padding: 1.25rem 1.5rem; }
+    .ed-footer { padding: 2rem 3rem; }
+  }
+  @media (max-width: 640px) {
+    .editor-page section, .unpublished, .editor-hero, .sample-excerpt, .editor-contact { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .editor-hero { padding-top: 7rem; }
+    .bio-strip { padding: 2rem 1.5rem; }
+    .bio-strip-text { grid-template-columns: 1fr; }
+    .clip-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .clip-meta { text-align: left; }
+    .photo-strip { grid-template-columns: 1fr 1fr; }
+    .ed-nav-links { gap: 1.2rem; }
+    .ed-nav-links a { font-size: 0.68rem; }
+    .ed-footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+
+<script>
+  const reveals = document.querySelectorAll(".editor-page .reveal");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible", "visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+  reveals.forEach((el) => observer.observe(el));
+
+  document.querySelectorAll('.editor-page a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const id = this.getAttribute("href");
+      const target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  });
+</script>

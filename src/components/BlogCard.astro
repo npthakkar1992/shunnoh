@@ -3,9 +3,9 @@ const { title, subtitle, href, imageSrc, imageAlt, flip = false } = Astro.props;
 ---
 <a
   href={href}
-  class={`read-more group grid items-center gap-6 sm:gap-10 md:grid-cols-2 ${flip ? "md:[&>*:first-child]:order-2" : ""}`}
+  class={`read-more group grid items-center gap-8 md:gap-12 md:grid-cols-[55%_45%] ${flip ? "md:[&>*:first-child]:order-2" : ""}`}
 >
-  <div class="overflow-hidden rounded-sm bg-cream aspect-[16/10]">
+  <div class="overflow-hidden rounded-[4px] bg-cream aspect-[4/3]">
     <img
       src={imageSrc}
       alt={imageAlt}
@@ -15,9 +15,9 @@ const { title, subtitle, href, imageSrc, imageAlt, flip = false } = Astro.props;
   </div>
 
   <div class="md:px-2">
-    <h3 class="font-display text-2xl sm:text-3xl text-ink leading-snug">{title}</h3>
-    <p class="font-body text-lg sm:text-xl text-stone mt-3 leading-relaxed">{subtitle}</p>
-    <span class="inline-flex items-center gap-1.5 font-ui text-xs uppercase tracking-wider text-terracotta group-hover:text-terracotta-deep mt-5 transition-colors">
+    <h3 class="font-display text-3xl sm:text-4xl text-ink leading-tight" style="font-weight:500;">{title}</h3>
+    <p class="font-body text-xl sm:text-2xl text-stone mt-4 leading-relaxed" style="font-weight:300;">{subtitle}</p>
+    <span class="inline-flex items-center gap-1.5 font-ui text-xs uppercase tracking-wider text-terracotta group-hover:text-terracotta-deep mt-6 transition-colors">
       Read Story <span class="arrow">→</span>
     </span>
   </div>
