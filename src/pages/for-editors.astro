@@ -26,7 +26,7 @@ const unpublished = [
   <div class="editor-page paper-texture">
     <!-- NAV (frosted) -->
     <nav class="ed-nav">
-      <a href="/" class="ed-nav-logo">Shunnoh</a>
+      <a href="/" class="ed-nav-logo" aria-label="Shunnoh — home"><img src="/images/branding/logo-wordmark-dark.svg" alt="Shunnoh" class="ed-nav-logo-img" width="210" height="48" /></a>
       <ul class="ed-nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/blogs">Blog</a></li>
@@ -181,7 +181,9 @@ const unpublished = [
   .ed-nav-logo {
     font-family: var(--font-display); font-size: 1.4rem; font-weight: 500;
     color: var(--ink); text-decoration: none; letter-spacing: 0.02em;
+    display: block;
   }
+  .ed-nav-logo-img { height: 1.75rem; width: auto; display: block; }
   .ed-nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
   .ed-nav-links a {
     font-family: var(--font-body); font-size: 0.82rem; font-weight: 400;

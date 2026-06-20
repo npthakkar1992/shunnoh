@@ -6,11 +6,15 @@ const { current = "" } = Astro.props;
   class="sticky top-0 z-50 w-full bg-warm-white/90 backdrop-blur-sm border-b border-[rgba(26,23,20,0.06)] transition-shadow duration-300"
 >
   <nav class="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10 h-16 flex items-center justify-between">
-    <a
-      href="/"
-      class="font-display text-ink"
-      style="font-size:1.4rem;font-weight:500;letter-spacing:0.02em;"
-    >Shunnoh</a>
+    <a href="/" aria-label="Shunnoh — home" class="block">
+      <img
+        src="/images/branding/logo-wordmark-dark.svg"
+        alt="Shunnoh"
+        class="h-7 w-auto"
+        width="210"
+        height="48"
+      />
+    </a>
 
     <div class="flex items-center gap-6 sm:gap-8">
       <a
