@@ -28,7 +28,7 @@ import { blogCards } from "../data/blogCards";
   </ScrollReveal>
 
   <!-- Discover -->
-  <ScrollReveal as="section" class="mx-auto max-w-2xl px-5 sm:px-8 text-center py-12">
+  <ScrollReveal as="section" class="mx-auto max-w-2xl px-5 sm:px-8 text-center py-16 sm:py-20">
     <h2 class="font-display text-3xl sm:text-4xl text-ink">Discover Travel Stories</h2>
     <p class="font-body text-xl text-stone mt-4 leading-relaxed">Personal tales of immersive travel, raw experiences, and unforgettable moments from my journey across destinations.</p>
     <a
@@ -38,7 +38,7 @@ import { blogCards } from "../data/blogCards";
   </ScrollReveal>
 
   <!-- Blog cards -->
-  <section class="mx-auto max-w-5xl px-5 sm:px-8 py-12 space-y-16 sm:space-y-20">
+  <section class="mx-auto max-w-5xl px-5 sm:px-8 py-16 space-y-16 sm:space-y-20">
     {blogCards.map((card, i) => (
       <ScrollReveal>
         <BlogCard
@@ -56,6 +56,9 @@ import { blogCards } from "../data/blogCards";
   <!-- Gallery -->
   <ScrollReveal as="section" class="py-16 sm:py-24">
     <div class="mx-auto max-w-2xl px-5 sm:px-8 text-center mb-10">
+      <span class="inline-flex items-center gap-3 font-ui text-[10px] uppercase tracking-widest text-terracotta mb-4">
+        <span class="inline-block w-6 h-px bg-terracotta"></span>Through My Lens
+      </span>
       <h2 class="font-display text-3xl sm:text-4xl text-ink">Gallery</h2>
       <p class="font-body text-xl text-stone mt-4 leading-relaxed">Explore stunning travel moments captured in our recent blog posts.</p>
     </div>
