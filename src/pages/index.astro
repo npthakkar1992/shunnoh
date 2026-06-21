@@ -19,7 +19,7 @@ import { blogCards } from "../data/blogCards";
   </div>
 
   <!-- Intro -->
-  <ScrollReveal as="section" class="mx-auto max-w-2xl px-5 sm:px-8 text-center pt-20 pb-12">
+  <ScrollReveal as="section" class="mx-auto max-w-2xl px-6 sm:px-8 lg:px-10 text-center pt-24 sm:pt-32 pb-16">
     <h1 class="font-display text-4xl sm:text-5xl text-ink leading-tight">Shunnoh, where you travel through words.</h1>
     <div class="font-body text-xl text-stone mt-8 space-y-5 leading-relaxed text-left sm:text-center">
       <p>Welcome to Shunnoh, a journey beyond the tourist trails and into the heart of experiential travel. I'm Barnali, a nomad seeking to truly live in the moment, amidst the chaos of digitalization. This blog is an invitation to slow down, and truly experience the places you travel, not just pass through them.</p>
@@ -28,7 +28,7 @@ import { blogCards } from "../data/blogCards";
   </ScrollReveal>
 
   <!-- Discover -->
-  <ScrollReveal as="section" class="mx-auto max-w-2xl px-5 sm:px-8 text-center py-16 sm:py-20">
+  <ScrollReveal as="section" class="border-t border-ink/[0.06] mx-auto max-w-2xl px-6 sm:px-8 lg:px-10 text-center py-20 sm:py-24">
     <h2 class="font-display text-3xl sm:text-4xl text-ink">Discover Travel Stories</h2>
     <p class="font-body text-xl text-stone mt-4 leading-relaxed">Personal tales of immersive travel, raw experiences, and unforgettable moments from my journey across destinations.</p>
     <a
@@ -38,24 +38,25 @@ import { blogCards } from "../data/blogCards";
   </ScrollReveal>
 
   <!-- Blog cards -->
-  <section class="mx-auto max-w-5xl px-5 sm:px-8 py-16 space-y-16 sm:space-y-20">
-    {blogCards.map((card, i) => (
-      <ScrollReveal>
-        <BlogCard
-          title={card.title}
-          subtitle={card.subtitle}
-          href={card.href}
-          imageSrc={card.imageSrc}
-          imageAlt={card.imageAlt}
-          flip={i % 2 === 1}
-        />
-      </ScrollReveal>
-    ))}
+  <section class="mx-auto max-w-6xl px-6 sm:px-8 lg:px-10 py-20 sm:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+      {blogCards.map((card) => (
+        <ScrollReveal>
+          <BlogCard
+            title={card.title}
+            subtitle={card.subtitle}
+            href={card.href}
+            imageSrc={card.imageSrc}
+            imageAlt={card.imageAlt}
+          />
+        </ScrollReveal>
+      ))}
+    </div>
   </section>
 
   <!-- Gallery -->
-  <ScrollReveal as="section" class="py-16 sm:py-24">
-    <div class="mx-auto max-w-2xl px-5 sm:px-8 text-center mb-10">
+  <ScrollReveal as="section" class="border-t border-ink/[0.06] py-20 sm:py-28">
+    <div class="mx-auto max-w-2xl px-6 sm:px-8 lg:px-10 text-center mb-14">
       <span class="inline-flex items-center gap-3 font-ui text-[10px] uppercase tracking-widest text-terracotta mb-4">
         <span class="inline-block w-6 h-px bg-terracotta"></span>Through My Lens
       </span>

@@ -14,19 +14,19 @@ const { title, subtitle, meta, hero, seoTitle, seoDescription } = Astro.props;
   </div>
 
   <!-- Header -->
-  <header class="mx-auto max-w-3xl px-5 sm:px-8 text-center pt-14 sm:pt-20 pb-10">
+  <header class="mx-auto max-w-3xl px-6 sm:px-8 lg:px-10 text-center pt-20 sm:pt-28 pb-14">
     <h1 class="font-display text-4xl sm:text-5xl text-ink leading-tight" style="font-weight:400;">{title}</h1>
     <p class="font-body italic text-xl sm:text-2xl text-stone mt-5 leading-relaxed" style="font-weight:300;">{subtitle}</p>
     <p class="font-ui text-xs uppercase tracking-wider text-stone-light mt-6">{meta}</p>
   </header>
 
   <!-- Body -->
-  <article class="post-body mx-auto px-5 sm:px-8 pb-8" style="max-width:720px;">
+  <article class="post-body mx-auto px-6 sm:px-8 lg:px-10 pb-16" style="max-width:720px;">
     <slot />
   </article>
 
   <!-- Comments (styled placeholder; wired up later) -->
-  <section class="mx-auto max-w-3xl px-5 sm:px-8 pt-10 pb-16 border-t border-sand/50 mt-8">
+  <section class="mx-auto max-w-3xl px-6 sm:px-8 lg:px-10 pt-14 pb-20 border-t border-sand/50 mt-12">
     <h2 class="font-display text-2xl text-ink">Comments</h2>
     <form class="mt-6 flex flex-col gap-4" onsubmit="return false;">
       <textarea
