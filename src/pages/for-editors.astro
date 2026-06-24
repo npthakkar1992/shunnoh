@@ -4,19 +4,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const themes = [
   {
     number: "01",
-    titleLead: "Experiential Travel & ",
-    titleEm: "Immersive Writing",
+    titleLead: "Immersive Travel ",
+    titleEm: "Tales",
     bgAlt: false,
     desc: "Writing that puts the reader inside the moment — not observing a place, but feeling its temperature, hearing its rhythm, smelling its streets. Every sense engaged, every sentence earned through being there.",
     gallery: ["Ghats at dawn", "Street scene", "On the water"],
-    excerpt:
-      "The ghats of Varanasi do not greet you — they confront you. Before your feet find the first wet step, the city has already decided what it will show you: the smoke that curls upward carrying someone's last prayer, the marigold garlands sinking slowly into water that has held ten thousand years of faith.",
-    citeTitle: "Varanasi",
-    citeHref: "/blogs/varanasi",
-    articles: [
-      { title: "Varanasi — Here, you either find Him, or you lose faith in Him", pub: "Shunnoh", href: "/blogs/varanasi" },
-      { title: "Goa's Glowing Forest — The Monsoon Treat", pub: "Shunnoh", href: "/blogs/goa" },
+    excerpts: [
+      "As I looked at the sky, language became briefly inadequate. I had seen stars before, but I had not seen the sky before. Not like this.",
+      "As dusk paints the Varanasi sky in hues of orange and purple, Dashashwamedh Ghat transforms into a stage for the mesmerizing Ganga Aarti. The air buzzes with anticipation as priests, clad in vibrant silk robes, prepare for the ceremony.",
+      "Stepping off the plane, I noticed a fellow passenger pause. The moment his foot touched the ground, he set his luggage aside and, with a reverent bow, touched his forehead to the cold tarmac — a silent, heartfelt greeting to the sacred city of ghats, Varanasi.",
+      "With all our torches off, deep in the jungle, we found ourselves mesmerized by these enigmatic organisms. Even the moonlight felt intrusive.",
+      "Tang, tang, tang, tang, tang, and it was five in the morning. Snuggled under a blanket, warmed by the heater, the sound came through exactly the way he had written it. Not described. Not paraphrased. Exactly. The clock tower was not a landmark I had to find on a map. It found me, lying in bed, half asleep, in a town I was only beginning to understand.",
     ],
+    articles: [],
   },
   {
     number: "02",
@@ -24,51 +24,45 @@ const themes = [
     titleEm: "Stories",
     bgAlt: true,
     desc: "Places told through their people, their food, their rituals. Not travel guides — travel stories. The kind that make a reader want to book a ticket or feel like they already have.",
-    gallery: ["Sarnath", "Varanasi food", "Goa forest"],
-    excerpt:
-      "Stepping off the plane, I noticed a fellow passenger, an older gentleman, pause. The moment his foot touched the ground, he set his luggage aside and, with a reverent bow, touched his forehead to the cold tarmac — a silent, heartfelt greeting to the sacred city.",
-    citeTitle: "Varanasi",
-    citeHref: "/blogs/varanasi",
+    gallery: ["Hoi An", "Sarnath", "Varanasi"],
+    excerpts: [
+      "The town wasn't preserved because it was loved. It was preserved because it was forgotten. The love came afterwards.",
+      "These were the giếng trời, the sky wells, a layout born out of a tax hack. When the property tax was based on street frontage, merchants built narrow but long tube houses, with a courtyard punched through the middle to let the sky in. Centuries-old tax avoidance is now considered beautiful traditional architecture.",
+      "A few kilometers from Varanasi, temple bells get replaced with bonshōs and damrus with prayer wheels. Temples take shapes of monasteries and purohits get replaced by monks. This is Sarnath.",
+      "On the same bank of the Ganges, the glorious Ganga Aarti illuminates one side, while blazing funeral pyres flicker on the other. Here, generosity and exploitation coexist. This is a city of striking polarity, embracing the divine radiance and the darkness of death in the same breath.",
+      "According to Vietnamese and Japanese folklore, Namazu is a giant catfish whose movements cause earthquakes and floods across Asia. And it sits right below this bridge. The Japanese merchants who settled here believed they were standing on its spine. So they built the bridge to pin the creature down, and stop earthquakes in Japan and floods in Hoi An.",
+    ],
     articles: [
+      { title: "Hoi An", pub: "Coming soon", href: null },
       { title: "Sarnath — Where the Wheel of Dharma was Turned", pub: "Shunnoh", href: "/blogs/sarnath" },
-      { title: "Best Foods in Varanasi — Your Guide to Iconic Local Flavors", pub: "Shunnoh", href: "/blogs/varanasi-food" },
+      { title: "Varanasi — Here, you either find Him, or you lose faith in Him", pub: "Shunnoh", href: "/blogs/varanasi" },
     ],
   },
   {
     number: "03",
-    titleLead: "Culture & ",
-    titleEm: "Heritage",
+    titleLead: "Craft & Culture — ",
+    titleEm: "The Making of Things",
     bgAlt: false,
-    desc: "The living traditions that define a place — festivals, rituals, sacred spaces, and the unwritten rules that bind communities. Writing that honours the people who keep these traditions alive.",
-    gallery: ["Ganga aarti", "Temple", "Daily ritual"],
-    excerpt:
-      "As dusk paints the Varanasi sky in hues of orange and purple, Dashashwamedh Ghat transforms into a stage for the mesmerizing Ganga Aarti. The air buzzes with anticipation as priests, clad in vibrant silk robes, prepare for the ceremony.",
-    citeTitle: "Varanasi",
-    citeHref: "/blogs/varanasi",
-    articles: [
-      { title: "Varanasi — Ganga Aarti, Manikarnika & the Sacred Ghats", pub: "Shunnoh", href: "/blogs/varanasi" },
+    desc: "The artisans, the looms, the hands that shape heritage. Stories that trace a craft from its origins to the workshop floor today — making the reader care about traditions they've never seen.",
+    gallery: ["Banarasi Saree", "Poila Baisakh", "Hoi An"],
+    excerpts: [
+      "The rhythmic clatter of looms whispers of the artistry of Banarasi saree weaving. The lanes, awash with murky dye water flowing from countless small workshops, make it hard to guess the brilliance of the finished sarees from the dark, discarded water staining the way.",
+      "Cao lầu, a noodle that is a prisoner of this town's geography. Not because of its recipe but because of its key ingredients: water from a 10th-century well and lye ash from a certain type of tree from a specific island. The name is a fossil. Cao means high. Lầu means floor. Once served on the upper floors of riverfront merchant houses to wealthy traders. Now, a street food.",
+      "The Naksha Pattas are the sole codes that these jacquard looms understand, much like binary codes are for computers.",
+      "What started as a tax reform in 1556 is today a feast, a reason for families to gather, to wear new clothes and still open fresh ledgers at the turn of the Bengali new year, long after they left the fields behind.",
+      "A Muslim community, where skilled weavers, mostly men wearing skullcaps, produced the iconic Banarasi sarees, a staple for Hindu weddings. The interweaving of cultures, evident in the workshop, hinted at a deeper, more complex history.",
     ],
-  },
-  {
-    number: "04",
-    titleLead: "Craft & ",
-    titleEm: "Living History",
-    bgAlt: true,
-    desc: "The artisans, the looms, the hands that shape heritage. Stories that trace a craft from its mythological origins to the workshop floor today — making the reader care about traditions they've never seen.",
-    gallery: ["The loom", "Weaver's hands", "The fabric"],
-    excerpt:
-      "A Banarasi saree is never merely worn. It is inherited, gifted, wept over, and remembered. The weavers of Varanasi don't make fabric — they make heirlooms. And in their looms, you can hear the rhythm of a tradition that has dressed gods, adorned royalty, and now drapes the shoulders of a woman walking into her own story.",
-    citeTitle: "The Banarasi Saree",
-    citeHref: "/blogs/banarasi-saree",
     articles: [
       { title: "The Banarasi Saree — From the Gods, through the Royals, to the Masses", pub: "Shunnoh", href: "/blogs/banarasi-saree" },
+      { title: "Poila Baisakh", pub: "Coming soon", href: null },
+      { title: "Hoi An — Craft Stories from a Forgotten Town", pub: "Coming soon", href: null },
     ],
   },
 ];
 
 const skills = [
-  "Consumer Research (Nielsen)", "Data & Insights", "SEO & Content Strategy",
-  "Editorial Writing", "Travel Photography", "Cultural Research", "Hindi · Bengali · English",
+  "Consumer Research (Nielsen)", "Search Strategy & SEO", "Editorial Writing",
+  "Travel Photography", "Cultural & Historical Research", "Hindi · Bengali · English",
 ];
 ---
 <BaseLayout title="For Editors — Shunnoh" description="Barnali's editorial portfolio — immersive travel writing, cultural features, and destination storytelling for publications." noindex={true}>
@@ -86,8 +80,10 @@ const skills = [
     <!-- HERO -->
     <section class="editor-hero">
       <div class="editor-hero-badge fade-up fade-up-1">For Editors &amp; Publications</div>
-      <h1 class="fade-up fade-up-2">I write the kind of travel stories readers <em>remember.</em></h1>
-      <p class="editor-hero-intro fade-up fade-up-3">I'm Barnali, the writer behind Shunnoh. I specialise in immersive, research-rich travel features — the kind where a reader doesn't just learn about a place, they feel like they've been there. If your publication values depth, sensory detail, and cultural authenticity over listicles and SEO filler, we should talk.</p>
+      <h1 class="fade-up fade-up-2">I don't write about your destinations, I make them come <em>alive.</em></h1>
+      <p class="editor-hero-tagline fade-up fade-up-2">A writer who breathes life into your stories.</p>
+      <p class="editor-hero-intro fade-up fade-up-3">Hi, I'm Barnali Haldar. I visit your destination not to tick it off a list but to live and breathe it. To dig into its history and find remarkable things it has been sitting on for generations—the things no one thought to mention. And then turn them into stories that make someone stop scrolling and start imagining themselves there. The kind that makes the difference between a visitor who books for the price and a visitor who now needs to be there.</p>
+      <p class="editor-hero-intro fade-up fade-up-3">I write for publications, but I don't write brand and editorial content differently. Your content gets the same depth, craft, and quality that a national publication would demand. I photograph what I find, because the story and the image should come from the same pair of eyes. And coming from consumer research and search strategy, I understand what people don't say out loud. What draws them in, makes them stay, and how to make sure they find you in the first place.</p>
     </section>
 
     <!-- THEME SECTIONS -->
@@ -105,21 +101,33 @@ const skills = [
           ))}
         </div>
 
-        <div class="theme-excerpt reveal reveal-delay-2">
-          <blockquote>{t.excerpt}</blockquote>
-          <cite>— from <a href={t.citeHref}>{t.citeTitle}</a></cite>
+        <div class="theme-excerpts reveal reveal-delay-2">
+          {t.excerpts.map((ex) => (
+            <div class="theme-excerpt">
+              <blockquote>{ex}</blockquote>
+            </div>
+          ))}
         </div>
 
-        <ul class="theme-articles reveal reveal-delay-2">
-          {t.articles.map((a) => (
-            <li>
-              <a href={a.href} class="theme-article-link">
-                <span class="theme-article-title">{a.title}</span>
-                <span class="theme-article-pub">{a.pub}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        {t.articles.length > 0 && (
+          <ul class="theme-articles reveal reveal-delay-2">
+            {t.articles.map((a) => (
+              <li>
+                {a.href ? (
+                  <a href={a.href} class="theme-article-link">
+                    <span class="theme-article-title">{a.title}</span>
+                    <span class="theme-article-pub">{a.pub}</span>
+                  </a>
+                ) : (
+                  <span class="theme-article-link">
+                    <span class="theme-article-title">{a.title}</span>
+                    <span class="theme-article-pub">{a.pub}</span>
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
     ))}
 
@@ -244,10 +252,16 @@ const skills = [
     margin-bottom: 2rem; letter-spacing: -0.01em;
   }
   .editor-hero h1 em { font-style: italic; color: var(--terracotta); }
+  .editor-hero-tagline {
+    font-family: var(--font-accent); font-style: italic; font-weight: 400;
+    font-size: 1.5rem; line-height: 1.4; color: var(--ink);
+    margin-bottom: 2rem; max-width: 680px;
+  }
   .editor-hero-intro {
     font-family: var(--font-accent); font-size: 1.25rem; font-weight: 300;
     line-height: 1.85; color: var(--charcoal); max-width: 680px;
   }
+  .editor-hero-intro + .editor-hero-intro { margin-top: 1.5rem; }
 
   /* SECTION SHARED */
   .editor-page section { padding: 5rem 6rem; }
@@ -275,7 +289,9 @@ const skills = [
   .theme-gallery-item { aspect-ratio: 4/3; background: var(--sand); display: flex; align-items: center; justify-content: center; font-family: var(--font-body); font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); overflow: hidden; transition: transform 0.5s ease; }
   .theme-gallery-item:hover { transform: scale(1.02); }
 
+  .theme-excerpts { margin-bottom: 1rem; }
   .theme-excerpt { border-left: 3px solid var(--terracotta); padding-left: 2rem; margin-bottom: 2.5rem; max-width: 650px; }
+  .theme-excerpt:last-child { margin-bottom: 0; }
   .theme-excerpt blockquote { font-family: var(--font-accent); font-size: 1.15rem; font-weight: 300; font-style: italic; line-height: 1.9; color: var(--ink); }
   .theme-excerpt cite { display: block; font-family: var(--font-body); font-size: 0.7rem; font-style: normal; letter-spacing: 0.08em; color: var(--stone); margin-top: 0.75rem; }
   .theme-excerpt cite a { color: var(--terracotta); text-decoration: none; border-bottom: 1px solid rgba(184,112,75,0.3); transition: border-color 0.3s; }
