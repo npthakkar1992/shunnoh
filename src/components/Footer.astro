@@ -1,11 +1,11 @@
 ---
 const { note = "" } = Astro.props;
 ---
-<footer class="bg-charcoal text-parchment mt-32">
+<footer class="site-footer bg-charcoal text-parchment mt-32">
   <div class="mx-auto max-w-6xl px-6 sm:px-8 lg:px-10 py-20">
     <div class="grid gap-10 md:grid-cols-3 md:gap-8">
       <div class="md:col-span-1">
-        <a href="/" aria-label="Shunnoh — home" class="block">
+        <a href="/" aria-label="Shunnoh — home" class="block foot-logo w-fit">
           <img src="/images/branding/logo-wordmark-light.svg" alt="Shunnoh" class="h-7 w-auto" width="210" height="48" />
         </a>
         <p class="font-ui text-sm text-stone mt-4 leading-relaxed max-w-xs">
@@ -14,19 +14,19 @@ const { note = "" } = Astro.props;
       </div>
 
       <nav class="flex flex-col gap-3 md:items-center" aria-label="Footer">
-        <a href="/" class="font-ui text-sm text-stone-light hover:text-parchment transition-colors w-fit">Home</a>
-        <a href="/blogs" class="font-ui text-sm text-stone-light hover:text-parchment transition-colors w-fit">Blogs</a>
+        <a href="/" class="foot-link nav-underline font-ui text-sm text-stone-light hover:text-parchment w-fit">Home</a>
+        <a href="/blogs" class="foot-link nav-underline font-ui text-sm text-stone-light hover:text-parchment w-fit">Blogs</a>
       </nav>
 
       <div class="flex gap-5 md:justify-end md:items-start">
-        <a href="https://www.instagram.com/shunnoh_" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-stone hover:text-parchment transition-colors">
+        <a href="https://www.instagram.com/shunnoh_" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="foot-social text-stone hover:text-terracotta">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
           </svg>
         </a>
-        <a href="https://x.com/shunnoh_blog" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="text-stone hover:text-parchment transition-colors">
+        <a href="https://x.com/shunnoh_blog" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="foot-social text-stone hover:text-terracotta">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"></path>
           </svg>
@@ -39,3 +39,18 @@ const { note = "" } = Astro.props;
     )}
   </div>
 </footer>
+
+<style>
+  .site-footer { position: relative; }
+  .site-footer::before {
+    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 200px; max-width: 60%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(184,112,75,0.5), transparent);
+  }
+  .foot-logo img { transition: opacity 300ms var(--ease-soft); }
+  .foot-logo:hover img { opacity: 0.85; }
+  .foot-link { transition: color 400ms var(--ease-soft); }
+  .foot-link.nav-underline::after { background: var(--color-parchment); transition: width 400ms var(--ease-soft); }
+  .foot-social { display: inline-flex; transition: color 300ms var(--ease-soft), transform 300ms var(--ease-soft); }
+  .foot-social:hover { transform: scale(1.08); }
+</style>

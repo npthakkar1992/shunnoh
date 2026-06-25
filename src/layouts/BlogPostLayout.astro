@@ -4,42 +4,67 @@ import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 
 const { title, subtitle, meta, hero, seoTitle, seoDescription } = Astro.props;
+// Split a "Published on X | Y min read" meta line so the divider can be coloured.
+const metaParts = typeof meta === "string" ? meta.split("|").map((s) => s.trim()) : [meta];
 ---
 <BaseLayout title={seoTitle ?? `${title} — Shunnoh`} description={seoDescription ?? subtitle}>
   <Nav current="blogs" />
 
   <!-- Hero -->
-  <div class="w-full aspect-[21/9] sm:aspect-[21/8] overflow-hidden bg-cream">
-    <img src={hero} alt={title} class="h-full w-full object-cover" />
+  <div class="hero-fade w-full aspect-[21/9] sm:aspect-[21/8] overflow-hidden bg-cream">
+    <img src={hero} alt={title} class="kenburns h-full w-full object-cover" />
   </div>
 
   <!-- Header -->
   <header class="mx-auto max-w-3xl px-6 sm:px-8 lg:px-10 text-center pt-20 sm:pt-28 pb-14">
-    <h1 class="font-display text-4xl sm:text-5xl text-ink leading-tight" style="font-weight:400;">{title}</h1>
-    <p class="font-body italic text-xl sm:text-2xl text-stone mt-5 leading-relaxed" style="font-weight:300;">{subtitle}</p>
-    <p class="font-ui text-xs uppercase tracking-wider text-stone-light mt-6">{meta}</p>
+    <h1 class="hero-load hero-load-1 font-display text-ink" style="font-size:clamp(2.8rem,5.5vw,4.2rem);font-weight:400;line-height:1.1;letter-spacing:-0.02em;">{title}</h1>
+    <p class="hero-load hero-load-2 post-subtitle font-body italic text-ink mt-5" style="font-size:clamp(1.4rem,2.4vw,1.8rem);font-weight:400;line-height:1.4;">{subtitle}</p>
+    <p class="hero-load hero-load-3 post-meta font-ui text-stone-light mt-6">
+      {metaParts.map((part, i) => (
+        <>
+          {i > 0 && <span class="post-meta-sep">•</span>}
+          {part}
+        </>
+      ))}
+    </p>
   </header>
 
   <!-- Body -->
-  <article class="post-body mx-auto px-6 sm:px-8 lg:px-10 pb-16" style="max-width:720px;">
+  <article class="post-body mx-auto px-6 sm:px-8 lg:px-10 pb-16" style="max-width:680px;">
     <slot />
   </article>
 
   <!-- Comments (styled placeholder; wired up later) -->
-  <section class="mx-auto max-w-3xl px-6 sm:px-8 lg:px-10 pt-14 pb-20 border-t border-sand/50 mt-12">
-    <h2 class="font-display text-2xl text-ink">Comments</h2>
+  <section class="comments mx-auto max-w-3xl px-6 sm:px-8 lg:px-10 pt-14 pb-20 mt-12">
+    <h2 class="font-display text-ink" style="font-size:clamp(1.6rem,2.5vw,2rem);font-weight:500;line-height:1.3;">Comments</h2>
     <form class="mt-6 flex flex-col gap-4" onsubmit="return false;">
       <textarea
         rows="3"
         placeholder="Share your thoughts…"
-        class="w-full rounded-sm border border-sand bg-warm-white px-4 py-3 font-body text-lg text-ink placeholder:text-stone-light focus:outline-none focus:border-terracotta"
+        class="comment-input w-full rounded-sm border border-sand bg-warm-white font-body text-lg text-ink placeholder:text-stone-light focus:outline-none"
       ></textarea>
       <button
         type="submit"
-        class="self-start rounded-full bg-terracotta px-6 py-2.5 font-ui text-sm uppercase tracking-wider text-warm-white hover:bg-terracotta-deep transition-colors"
+        class="cta-nudge self-start inline-flex items-center gap-1.5 rounded-full bg-terracotta px-6 py-2.5 font-ui text-sm uppercase tracking-wider text-warm-white hover:bg-terracotta-deep"
       >Publish</button>
     </form>
   </section>
 
   <Footer />
 </BaseLayout>
+
+<style>
+  .post-meta {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em;
+    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+  }
+  .post-meta-sep { color: var(--color-terracotta); }
+  .comments { position: relative; }
+  .comments::before {
+    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 200px; max-width: 60%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(184,112,75,0.5), transparent);
+  }
+  .comment-input { padding: 0.875rem 1rem; transition: border-color 300ms var(--ease-soft); }
+  .comment-input:focus { border-color: var(--color-terracotta); }
+</style>

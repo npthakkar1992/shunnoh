@@ -7,11 +7,13 @@ const { title, subtitle, href, imageSrc, imageAlt } = Astro.props;
       src={imageSrc}
       alt={imageAlt}
       loading="lazy"
-      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+      class="card-img h-full w-full object-cover"
     />
   </div>
   <div class="pt-5">
-    <h3 class="font-display text-2xl sm:text-3xl text-ink leading-snug" style="font-weight:500;">{title}</h3>
+    <h3 class="font-display text-2xl sm:text-3xl text-ink leading-snug group-hover:text-terracotta transition-colors" style="font-weight:500;">
+      <span class="title-underline">{title}</span>
+    </h3>
     <p class="font-body text-lg text-stone mt-3 leading-relaxed" style="font-weight:300;">{subtitle}</p>
     <span class="inline-flex items-center gap-1.5 font-ui text-xs uppercase tracking-wider text-terracotta group-hover:text-terracotta-deep mt-5 transition-colors">
       Read Story <span class="arrow">→</span>

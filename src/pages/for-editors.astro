@@ -330,10 +330,13 @@ const skills = [
     width: 200px; max-width: 60%; height: 1px;
     background: linear-gradient(to right, transparent, rgba(26,23,20,0.08), transparent);
   }
-  .theme-section.bg-alt {
-    background: #f1ebe0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  .theme-section.bg-alt { background: #f1ebe0; }
+  .theme-section.bg-alt::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+  .theme-section.bg-alt > * { position: relative; z-index: 1; }
   .theme-header { max-width: 540px; margin-bottom: 3rem; }
   .theme-number { font-family: var(--font-display); font-size: 0.85rem; color: #a39e93; margin-bottom: 0.75rem; }
   .theme-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 400; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 1rem; color: var(--ink); }

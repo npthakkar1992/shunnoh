@@ -5,19 +5,19 @@ const { images = [], caption = "", alt = "" } = Astro.props;
 const single = images.length === 1;
 ---
 <figure class="my-10">
-  <div class={single ? "" : "grid gap-4 sm:grid-cols-2"}>
+  <div class={single ? "" : "grid gap-5 sm:grid-cols-2"}>
     {images.map((src, i) => (
       <div class={`overflow-hidden rounded-sm bg-cream ${single ? "aspect-[3/2]" : "aspect-[4/3]"}`}>
         <img
           src={src}
           alt={caption || alt || `Image ${i + 1}`}
           loading="lazy"
-          class="h-full w-full object-cover transition-[filter] duration-300 hover:brightness-[1.03]"
+          class="img-hover h-full w-full object-cover"
         />
       </div>
     ))}
   </div>
   {caption && (
-    <figcaption class="font-ui text-xs italic text-stone-light text-center mt-3">{caption}</figcaption>
+    <figcaption class="mx-auto text-center mt-3" style="font-family:var(--font-ui);font-size:0.75rem;font-style:italic;color:var(--color-stone-light);">{caption}</figcaption>
   )}
 </figure>

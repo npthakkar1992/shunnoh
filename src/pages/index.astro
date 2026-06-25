@@ -14,31 +14,31 @@ import { blogCards } from "../data/blogCards";
   <Nav current="home" />
 
   <!-- Hero image -->
-  <div class="w-full aspect-[1400/650] max-h-[78vh] overflow-hidden bg-cream">
-    <img src="/images/hero/homepage-hero.jpg" alt="The ghats of Varanasi at dawn" class="h-full w-full object-cover" />
+  <div class="hero-fade w-full aspect-[1400/650] max-h-[78vh] overflow-hidden bg-cream">
+    <img src="/images/hero/homepage-hero.jpg" alt="The ghats of Varanasi at dawn" class="kenburns h-full w-full object-cover" />
   </div>
 
   <!-- Intro -->
-  <ScrollReveal as="section" class="mx-auto max-w-2xl px-6 sm:px-8 lg:px-10 text-center pt-24 sm:pt-32 pb-16">
-    <h1 class="font-display text-4xl sm:text-5xl text-ink leading-tight">Shunnoh, where you travel through words.</h1>
-    <div class="font-body text-xl text-stone mt-8 space-y-5 leading-relaxed text-left sm:text-center">
-      <p>Welcome to Shunnoh, a journey beyond the tourist trails and into the heart of experiential travel. I'm Barnali, a nomad seeking to truly live in the moment, amidst the chaos of digitalization. This blog is an invitation to slow down, and truly experience the places you travel, not just pass through them.</p>
-      <p>Shunnoh, meaning "zero" in Bengali, reflects the quiet solitude and Zen-like clarity found in exploration—the blank canvas for our travel stories. Join me as we delve deeper, exploring not just what to see, but how to feel, connect, and truly understand the places we visit. Let's embark on a journey of discovery, together.</p>
+  <section class="mx-auto max-w-2xl px-6 sm:px-8 lg:px-10 text-center pt-24 sm:pt-32 pb-16">
+    <h1 class="hero-load hero-load-1 font-display text-ink leading-[1.15]" style="font-size:clamp(2.8rem,5vw,4rem);letter-spacing:-0.02em;">Shunnoh, where you travel through words.</h1>
+    <div class="font-body text-xl text-stone mt-8 leading-relaxed text-left sm:text-center">
+      <p class="hero-load hero-load-2">Welcome to Shunnoh, a journey beyond the tourist trails and into the heart of experiential travel. I'm Barnali, a nomad seeking to truly live in the moment, amidst the chaos of digitalization. This blog is an invitation to slow down, and truly experience the places you travel, not just pass through them.</p>
+      <p class="hero-load hero-load-3 mt-5">Shunnoh, meaning "zero" in Bengali, reflects the quiet solitude and Zen-like clarity found in exploration—the blank canvas for our travel stories. Join me as we delve deeper, exploring not just what to see, but how to feel, connect, and truly understand the places we visit. Let's embark on a journey of discovery, together.</p>
     </div>
-  </ScrollReveal>
+  </section>
 
   <!-- Discover -->
-  <ScrollReveal as="section" class="border-t border-ink/[0.06] mx-auto max-w-2xl px-6 sm:px-8 lg:px-10 text-center py-20 sm:py-24">
-    <h2 class="font-display text-3xl sm:text-4xl text-ink">Discover Travel Stories</h2>
+  <ScrollReveal as="section" class="section-divider mx-auto max-w-2xl px-6 sm:px-8 lg:px-10 text-center py-28 sm:py-32">
+    <h2 class="font-display text-ink" style="font-size:clamp(1.8rem,3vw,2.4rem);letter-spacing:-0.01em;line-height:1.25;">Discover Travel Stories</h2>
     <p class="font-body text-xl text-stone mt-4 leading-relaxed">Personal tales of immersive travel, raw experiences, and unforgettable moments from my journey across destinations.</p>
     <a
       href="/blogs"
-      class="inline-block mt-8 rounded-full bg-terracotta px-7 py-3 font-ui text-sm uppercase tracking-wider text-warm-white hover:bg-terracotta-deep transition-colors"
-    >Read Stories</a>
+      class="cta-nudge inline-flex items-center gap-1.5 mt-8 rounded-full bg-terracotta px-7 py-3 font-ui text-sm uppercase tracking-wider text-warm-white hover:bg-terracotta-deep"
+    >Read Stories <span class="arrow">→</span></a>
   </ScrollReveal>
 
   <!-- Blog cards -->
-  <section class="mx-auto max-w-6xl px-6 sm:px-8 lg:px-10 py-20 sm:py-24">
+  <section class="mx-auto max-w-6xl px-6 sm:px-8 lg:px-10 py-28 sm:py-32">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
       {blogCards.map((card) => (
         <ScrollReveal>
@@ -55,12 +55,12 @@ import { blogCards } from "../data/blogCards";
   </section>
 
   <!-- Gallery -->
-  <ScrollReveal as="section" class="border-t border-ink/[0.06] py-20 sm:py-28">
+  <ScrollReveal as="section" class="section-divider py-28 sm:py-32">
     <div class="mx-auto max-w-2xl px-6 sm:px-8 lg:px-10 text-center mb-14">
       <span class="inline-flex items-center gap-3 font-ui text-[10px] uppercase tracking-widest text-terracotta mb-4">
         <span class="inline-block w-6 h-px bg-terracotta"></span>Through My Lens
       </span>
-      <h2 class="font-display text-3xl sm:text-4xl text-ink">Gallery</h2>
+      <h2 class="font-display text-ink" style="font-size:clamp(1.8rem,3vw,2.4rem);letter-spacing:-0.01em;line-height:1.25;">Gallery</h2>
       <p class="font-body text-xl text-stone mt-4 leading-relaxed">Explore stunning travel moments captured in our recent blog posts.</p>
     </div>
     <Gallery />
@@ -68,3 +68,12 @@ import { blogCards } from "../data/blogCards";
 
   <Footer />
 </BaseLayout>
+
+<style>
+  .section-divider { position: relative; }
+  .section-divider::before {
+    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 200px; max-width: 60%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(26,23,20,0.08), transparent);
+  }
+</style>
