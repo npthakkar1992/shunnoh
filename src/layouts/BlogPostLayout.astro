@@ -3,68 +3,442 @@ import BaseLayout from "./BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 
-const { title, subtitle, meta, hero, seoTitle, seoDescription } = Astro.props;
-// Split a "Published on X | Y min read" meta line so the divider can be coloured.
-const metaParts = typeof meta === "string" ? meta.split("|").map((s) => s.trim()) : [meta];
+const {
+  title,
+  subtitle,
+  meta,
+  hero,
+  seoTitle,
+  seoDescription,
+  numeral = "",
+  kicker = "",
+  location = "",
+  date = "",
+  readTime = "",
+  coords = "",
+  nextTitle = "",
+  nextSubtitle = "",
+  nextHero = "",
+  nextSlug = "",
+  nextNumeral = "",
+} = Astro.props;
 ---
 <BaseLayout title={seoTitle ?? `${title} — Shunnoh`} description={seoDescription ?? subtitle}>
   <Nav current="blogs" />
 
-  <!-- Hero -->
-  <div class="hero-fade w-full aspect-[21/9] sm:aspect-[21/8] overflow-hidden bg-cream">
-    <img src={hero} alt={title} class="kenburns h-full w-full object-cover" />
+  <!-- Back link -->
+  <div class="back-bar mx-auto px-4 sm:px-6 lg:px-14" style="max-width:1360px;padding-top:2rem;padding-bottom:0;">
+    <a href="/blogs" class="back-link">← All chapters</a>
   </div>
 
-  <!-- Header -->
-  <header class="mx-auto max-w-3xl px-6 sm:px-8 lg:px-10 text-center pt-20 sm:pt-28 pb-14">
-    <h1 class="hero-load hero-load-1 font-display text-ink" style="font-size:clamp(2.8rem,5.5vw,4.2rem);font-weight:400;line-height:1.1;letter-spacing:-0.02em;">{title}</h1>
-    <p class="hero-load hero-load-2 post-subtitle font-body italic text-ink mt-5" style="font-size:clamp(1.4rem,2.4vw,1.8rem);font-weight:400;line-height:1.4;">{subtitle}</p>
-    <p class="hero-load hero-load-3 post-meta font-ui text-stone-light mt-6">
-      {metaParts.map((part, i) => (
-        <>
-          {i > 0 && <span class="post-meta-sep">•</span>}
-          {part}
-        </>
-      ))}
-    </p>
+  <!-- Article header (centred) -->
+  <header class="article-header text-center mx-auto px-6" style="max-width:860px;padding-top:4rem;padding-bottom:3rem;">
+    {numeral && (
+      <div class="article-numeral hero-load hero-load-1">{numeral}</div>
+    )}
+    {kicker && (
+      <p class="article-kicker hero-load hero-load-1">{kicker}</p>
+    )}
+    <h1 class="article-title hero-load hero-load-2">{title}</h1>
+    <p class="article-subtitle hero-load hero-load-3">{subtitle}</p>
+    {(date || readTime || location) && (
+      <p class="article-meta hero-load hero-load-3">
+        {date}{date && readTime ? " • " : ""}{readTime}{(date || readTime) && location ? " • " : ""}{location}
+      </p>
+    )}
   </header>
 
-  <!-- Body -->
-  <article class="post-body mx-auto px-6 sm:px-8 lg:px-10 pb-16" style="max-width:680px;">
-    <slot />
-  </article>
+  <!-- Wide hero image -->
+  <div class="hero-wrap mx-auto px-4 md:px-6" style="max-width:1180px;margin-bottom:0;">
+    <div class="article-hero-frame hero-fade overflow-hidden" style="border-radius:4px;background:#ede6d8;">
+      <img src={hero} alt={title} class="kenburns h-full w-full object-cover rounded" />
+    </div>
+  </div>
 
-  <!-- Comments (styled placeholder; wired up later) -->
-  <section class="comments mx-auto max-w-3xl px-6 sm:px-8 lg:px-10 pt-14 pb-20 mt-12">
-    <h2 class="font-display text-ink" style="font-size:clamp(1.6rem,2.5vw,2rem);font-weight:500;line-height:1.3;">Comments</h2>
-    <form class="mt-6 flex flex-col gap-4" onsubmit="return false;">
-      <textarea
-        rows="3"
-        placeholder="Share your thoughts…"
-        class="comment-input w-full rounded-sm border border-sand bg-warm-white font-body text-lg text-ink placeholder:text-stone-light focus:outline-none"
-      ></textarea>
-      <button
-        type="submit"
-        class="cta-nudge self-start inline-flex items-center gap-1.5 rounded-full bg-terracotta px-6 py-2.5 font-ui text-sm uppercase tracking-wider text-warm-white hover:bg-terracotta-deep"
-      >Publish</button>
-    </form>
-  </section>
+  <!-- Two-column body -->
+  <div class="article-columns mx-auto px-4 md:px-6" style="max-width:1180px;padding-top:5rem;padding-bottom:4rem;">
+    <!-- Sticky sidebar -->
+    <aside class="article-aside">
+      <div class="aside-section reveal">
+        <p class="aside-label">Chapter</p>
+        <p class="aside-value">{numeral} <span style="color:#b0a89c;">/ V</span></p>
+      </div>
+      {location && (
+        <div class="aside-section reveal reveal-delay-1">
+          <p class="aside-label">Where</p>
+          <p class="aside-value">{location}</p>
+          {coords && <p class="aside-coords">{coords}</p>}
+        </div>
+      )}
+      {date && (
+        <div class="aside-section reveal reveal-delay-2">
+          <p class="aside-label">When</p>
+          <p class="aside-value">{date}</p>
+        </div>
+      )}
+      <hr class="aside-divider reveal reveal-delay-2" />
+      <div class="aside-section reveal reveal-delay-3">
+        <p class="aside-label">Share</p>
+        <button class="aside-share-btn" id="copy-link-btn">Copy link</button>
+        <a href={`mailto:?subject=${encodeURIComponent(title + ' — Shunnoh')}&body=${encodeURIComponent(typeof Astro !== 'undefined' && Astro.url ? Astro.url.href : '')}`} class="aside-share-link">Email</a>
+      </div>
+    </aside>
+
+    <!-- Article body -->
+    <article class="post-body">
+      <slot />
+
+      <!-- End of article marker -->
+      <div class="article-end-row">
+        <span class="article-end-marker">— end of chapter {numeral}</span>
+        <a href="/blogs" class="article-end-back">↩ Back to index</a>
+      </div>
+    </article>
+  </div>
+
+  <!-- Next chapter section -->
+  {nextSlug && (
+    <section class="next-chapter reveal">
+      <a href={`/blogs/${nextSlug}`} class="next-chapter-link" aria-label={`Read next: ${nextTitle}`}>
+        <div class="next-chapter-inner mx-auto px-4 sm:px-6 lg:px-14" style="max-width:1360px;">
+          <div class="next-chapter-grid">
+            <div class="next-chapter-text">
+              <p class="next-chapter-label">Next chapter — {nextNumeral}</p>
+              <h2 class="next-chapter-title">{nextTitle}</h2>
+              {nextSubtitle && <p class="next-chapter-subtitle">{nextSubtitle}</p>}
+              <span class="next-chapter-cta">Read on →</span>
+            </div>
+            {nextHero && (
+              <div class="next-chapter-img-wrap">
+                <img src={nextHero} alt={nextTitle} class="next-chapter-img kenburns-slow" />
+              </div>
+            )}
+          </div>
+        </div>
+      </a>
+    </section>
+  )}
 
   <Footer />
 </BaseLayout>
 
 <style>
-  .post-meta {
-    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em;
-    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+  .back-link {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #8a8175;
+    text-decoration: none;
+    transition: color 300ms var(--ease-soft);
   }
-  .post-meta-sep { color: var(--color-terracotta); }
-  .comments { position: relative; }
-  .comments::before {
-    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    width: 200px; max-width: 60%; height: 1px;
-    background: linear-gradient(to right, transparent, rgba(184,112,75,0.5), transparent);
+  .back-link:hover { color: var(--color-terracotta); }
+
+  .article-numeral {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 48px;
+    font-weight: 400;
+    color: #b8704b;
+    line-height: 1;
+    margin-bottom: 0.5rem;
   }
-  .comment-input { padding: 0.875rem 1rem; transition: border-color 300ms var(--ease-soft); }
-  .comment-input:focus { border-color: var(--color-terracotta); }
+  .article-kicker {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #8a8175;
+    margin-bottom: 1.25rem;
+  }
+  .article-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(56px, 8vw, 120px);
+    font-weight: 400;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: #1a1714;
+    margin-bottom: 1rem;
+  }
+  .article-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+    font-weight: 300;
+    line-height: 1.45;
+    color: #2d2a26;
+    margin-bottom: 1.5rem;
+  }
+  .article-meta {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #8a8175;
+  }
+
+  .hero-wrap { padding-bottom: 0; }
+
+  /* Hero responsive aspect-ratio */
+  .article-hero-frame {
+    aspect-ratio: 21/10;
+  }
+
+  /* Two-column layout */
+  .article-columns {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  /* Article body — overflow:hidden contains the figure bleed within this column */
+  .post-body {
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  @media (max-width: 900px) {
+    .article-columns {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .article-aside { position: static !important; }
+  }
+
+  .article-aside {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .aside-section { margin-bottom: 1.25rem; }
+  .aside-label {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #b0a89c;
+    margin-bottom: 5px;
+  }
+  .aside-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #1a1714;
+    line-height: 1.4;
+  }
+  .aside-coords {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    color: #b0a89c;
+    margin-top: 2px;
+  }
+  .aside-divider {
+    border: none;
+    border-top: 1px solid #ede6d8;
+    margin: 0.5rem 0 1.25rem;
+  }
+  .aside-share-btn {
+    display: block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #8a8175;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 6px;
+    transition: color 300ms var(--ease-soft);
+  }
+  .aside-share-btn:hover { color: var(--color-terracotta); }
+  .aside-share-link {
+    display: block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #8a8175;
+    text-decoration: none;
+    transition: color 300ms var(--ease-soft);
+  }
+  .aside-share-link:hover { color: var(--color-terracotta); }
+
+  /* Article end row */
+  .article-end-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ede6d8;
+  }
+  .article-end-marker {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: #b8704b;
+  }
+  .article-end-back {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #8a8175;
+    text-decoration: none;
+    transition: color 300ms var(--ease-soft);
+  }
+  .article-end-back:hover { color: var(--color-terracotta); }
+
+  /* Next chapter section */
+  .next-chapter {
+    background: #f5f0e8;
+    margin-top: 0;
+  }
+  .next-chapter-link {
+    display: block;
+    text-decoration: none;
+    transition: opacity 300ms var(--ease-soft);
+  }
+  .next-chapter-link:hover { opacity: 0.92; }
+  .next-chapter-inner {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .next-chapter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    .next-chapter-grid { grid-template-columns: 1fr; gap: 32px; }
+    .next-chapter-inner { padding-inline: 1.5rem; }
+  }
+  .next-chapter-label {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #8a8175;
+    margin-bottom: 1rem;
+  }
+  .next-chapter-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: #1a1714;
+    margin-bottom: 1rem;
+  }
+  .next-chapter-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #8a8175;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  .next-chapter-cta {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #b8704b;
+  }
+  .next-chapter-img-wrap {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #ede6d8;
+  }
+  .next-chapter-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  /* ── Mobile (≤ 640px) — placed last so it wins over base rules ── */
+  @media (max-width: 640px) {
+    .article-hero-frame { aspect-ratio: 4/3; }
+
+    /* Compact horizontal aside strip */
+    .article-aside {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+      padding: 14px 16px;
+      background: #f5f0e8;
+      border-radius: 2px;
+      border: 1px solid #ede6d8;
+    }
+    .aside-section { margin-bottom: 0; }
+    .aside-divider { display: none; }
+    .aside-label { font-size: 9px; }
+    .aside-value { font-size: 13px; }
+    .aside-coords { display: none; }
+
+    .article-columns {
+      padding-top: 2.5rem !important;
+      padding-bottom: 2.5rem !important;
+      gap: 16px;
+    }
+    .article-header {
+      padding-top: 2rem !important;
+      padding-bottom: 1.5rem !important;
+    }
+    .article-title { font-size: clamp(2.5rem, 12vw, 4rem); }
+    .next-chapter-inner { padding-top: 48px; padding-bottom: 48px; }
+    .article-end-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
 </style>
+
+<script>
+  // ── Scroll reveal (reuse for-editors pattern) ──
+  const revealObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  // Observe static .reveal elements (aside sections, next-chapter)
+  document.querySelectorAll(".reveal").forEach((el) => revealObs.observe(el));
+
+  // Dynamically add .reveal to post-body direct children for scroll animation
+  const postBody = document.querySelector(".post-body");
+  if (postBody) {
+    Array.from(postBody.children).forEach((child) => {
+      if ((child as HTMLElement).classList.contains("article-end-row")) return;
+      child.classList.add("reveal");
+      revealObs.observe(child);
+    });
+  }
+
+  // ── Copy link button ──
+  const btn = document.getElementById("copy-link-btn");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(() => { btn.textContent = orig; }, 2000);
+      });
+    });
+  }
+</script>

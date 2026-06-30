@@ -3,7 +3,23 @@ import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 import ImagePair from "../../components/ImagePair.astro";
 import post from "../../content/varanasi-food.json";
 ---
-<BlogPostLayout title={post.title} subtitle={post.subtitle} meta={post.meta} hero={post.hero}>
+<BlogPostLayout
+  title={post.title}
+  subtitle={post.subtitle}
+  meta={post.meta}
+  hero={post.hero}
+  numeral="IV"
+  kicker="Food · Varanasi"
+  location="Varanasi, Uttar Pradesh"
+  date="July 2025"
+  readTime="8 min"
+  coords="25.3176° N, 82.9739° E"
+  nextSlug="goa"
+  nextNumeral="V"
+  nextTitle="Goa's Glowing Forest"
+  nextSubtitle="The Monsoon Treat"
+  nextHero="/images/blog/goa/hero.png"
+>
   {post.blocks.map((block) =>
     block.type === "h" ? (
       <h2 class="font-display text-2xl sm:text-3xl text-ink mt-12 mb-4 leading-snug">{block.text}</h2>

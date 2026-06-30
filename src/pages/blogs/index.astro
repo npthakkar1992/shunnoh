@@ -2,39 +2,456 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
-import BlogCard from "../../components/BlogCard.astro";
-import ScrollReveal from "../../components/ScrollReveal.astro";
 import { blogCards } from "../../data/blogCards";
+
+const varanasi    = blogCards[0];
+const banarasi    = blogCards[1];
+const sarnath     = blogCards[2];
+const varFood     = blogCards[3];
+const goa         = blogCards[4];
 ---
 <BaseLayout title="Stories — Shunnoh" description="Immersive travel stories from Varanasi, Goa, and beyond.">
   <Nav current="blogs" />
 
-  <!-- Header -->
-  <section class="bg-parchment">
-    <div class="mx-auto max-w-3xl px-6 sm:px-8 lg:px-10 text-center py-28 sm:py-36">
-      <h1 class="hero-load hero-load-1 font-display text-ink" style="font-size:clamp(2.8rem,5.5vw,4.2rem);letter-spacing:-0.02em;line-height:1.1;">Blogs</h1>
-      <p class="hero-load hero-load-2 font-body text-stone mt-6 mx-auto" style="font-size:clamp(1.05rem,1.4vw,1.2rem);line-height:1.85;font-weight:300;max-width:640px;">
+  <!-- ─── Index Header ─── -->
+  <section class="index-header-section">
+    <div class="site-container">
+      <div class="index-header-row">
+        <h1 class="index-heading hero-load hero-load-1">The Index</h1>
+        <span class="index-chapter-count hero-load hero-load-1">Five chapters</span>
+      </div>
+      <div class="index-rule"></div>
+      <p class="index-intro hero-load hero-load-2">
         Explore travel through a different lens—where the journey matters as much as the destination. Shunnoh is a space for slow, meaningful exploration, uncovering the soul of every place beyond the tourist map. From hidden gems to transformative experiences, each story here is an invitation to connect, feel, and truly belong wherever you wander.
       </p>
     </div>
   </section>
 
-  <!-- Blog cards -->
-  <section class="mx-auto max-w-6xl px-6 sm:px-8 lg:px-10 py-28 sm:py-32">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
-      {blogCards.map((card) => (
-        <ScrollReveal>
-          <BlogCard
-            title={card.title}
-            subtitle={card.subtitle}
-            href={card.href}
-            imageSrc={card.imageSrc}
-            imageAlt={card.imageAlt}
-          />
-        </ScrollReveal>
-      ))}
+  <!-- ─── Story I — Varanasi ─── -->
+  <section class="story-section">
+    <div class="site-container">
+      <a href={varanasi.href} class="story-link story-i-grid">
+        <div class="story-text">
+          <div class="story-numeral reveal">{varanasi.numeral}</div>
+          <p class="story-kicker reveal reveal-delay-1">{varanasi.kicker}</p>
+          <h2 class="story-title reveal reveal-delay-1">{varanasi.title}</h2>
+          <p class="story-subtitle reveal reveal-delay-2">{varanasi.subtitle}</p>
+          <div class="story-meta-row reveal reveal-delay-3">
+            <span class="story-readtime">{varanasi.readTime} read</span>
+            <span class="story-read-cta">Read chapter →</span>
+          </div>
+        </div>
+        <div class="story-img-wrap reveal reveal-delay-2" style="aspect-ratio:4/5;">
+          <img src={varanasi.imageSrc} alt={varanasi.imageAlt} class="story-img kenburns" />
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="story-divider"><div class="site-container"><hr /></div></div>
+
+  <!-- ─── Story II — Banarasi Saree ─── -->
+  <section class="story-section">
+    <div class="site-container">
+      <a href={banarasi.href} class="story-link story-ii-layout">
+        <div class="story-ii-header">
+          <div class="story-numeral text-center reveal">{banarasi.numeral}</div>
+          <p class="story-kicker text-center reveal reveal-delay-1">{banarasi.kicker}</p>
+          <h2 class="story-title text-center reveal reveal-delay-1">{banarasi.title}</h2>
+          <p class="story-subtitle text-center reveal reveal-delay-2">{banarasi.subtitle}</p>
+        </div>
+        <div class="story-ii-img-wrap reveal reveal-delay-2">
+          <img src={banarasi.imageSrc} alt={banarasi.imageAlt} class="story-img kenburns" />
+        </div>
+        <div class="story-ii-footer reveal reveal-delay-3">
+          <span class="story-readtime">{banarasi.readTime} read</span>
+          <span class="story-read-cta">Read chapter →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="story-divider"><div class="site-container"><hr /></div></div>
+
+  <!-- ─── Story III — Sarnath ─── -->
+  <section class="story-section story-section-parchment">
+    <div class="site-container">
+      <a href={sarnath.href} class="story-link story-iii-grid">
+        <div class="story-img-wrap reveal" style="aspect-ratio:3/4;">
+          <img src={sarnath.imageSrc} alt={sarnath.imageAlt} class="story-img kenburns" />
+        </div>
+        <div class="story-text">
+          <div class="story-numeral reveal reveal-delay-1">{sarnath.numeral}</div>
+          <p class="story-kicker reveal reveal-delay-2">{sarnath.kicker}</p>
+          <h2 class="story-title reveal reveal-delay-2">{sarnath.title}</h2>
+          <p class="story-subtitle reveal reveal-delay-3">{sarnath.subtitle}</p>
+          <div class="story-meta-row reveal reveal-delay-3">
+            <span class="story-readtime">{sarnath.readTime} read</span>
+            <span class="story-read-cta">Read chapter →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="story-divider"><div class="site-container"><hr /></div></div>
+
+  <!-- ─── Story IV — Varanasi Food ─── -->
+  <section class="story-section">
+    <div class="site-container">
+      <a href={varFood.href} class="story-link story-iv-grid">
+        <div class="story-text">
+          <div class="story-numeral reveal">{varFood.numeral}</div>
+          <p class="story-kicker reveal reveal-delay-1">{varFood.kicker}</p>
+          <h2 class="story-title reveal reveal-delay-1">{varFood.title}</h2>
+          <p class="story-subtitle reveal reveal-delay-2">{varFood.subtitle}</p>
+          <div class="story-meta-row reveal reveal-delay-3">
+            <span class="story-readtime">{varFood.readTime} read</span>
+            <span class="story-read-cta">Read chapter →</span>
+          </div>
+        </div>
+        <div class="story-img-wrap reveal reveal-delay-2" style="aspect-ratio:5/6;">
+          <img src={varFood.imageSrc} alt={varFood.imageAlt} class="story-img kenburns" />
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── Story V — Goa (full-bleed dark) ─── -->
+  <section class="story-v-section">
+    <div class="story-v-bg">
+      <img src={goa.imageSrc} alt={goa.imageAlt} class="story-v-bg-img kenburns-slow" />
+      <div class="story-v-overlay"></div>
+      <div class="story-v-gradient"></div>
+    </div>
+    <div class="story-v-inner site-container">
+      <a href={goa.href} class="story-link story-v-grid">
+        <div class="story-v-text">
+          <div class="story-numeral story-numeral-light reveal">{goa.numeral}</div>
+          <p class="story-kicker story-kicker-light reveal reveal-delay-1">{goa.kicker}</p>
+          <h2 class="story-title story-title-light reveal reveal-delay-1">{goa.title}</h2>
+          <p class="story-subtitle story-subtitle-light reveal reveal-delay-2">{goa.subtitle}</p>
+          <div class="story-meta-row reveal reveal-delay-3">
+            <span class="story-readtime story-readtime-light">{goa.readTime} read</span>
+            <span class="story-read-cta story-cta-light">Read chapter →</span>
+          </div>
+        </div>
+        <div></div>
+      </a>
     </div>
   </section>
 
   <Footer />
 </BaseLayout>
+
+<style>
+  .site-container {
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: 56px;
+  }
+  @media (max-width: 768px) {
+    .site-container { padding-inline: 24px; }
+  }
+
+  /* ─── Index header ─── */
+  .index-header-section {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+  .index-header-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .index-heading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 400;
+    color: #1a1714;
+  }
+  .index-chapter-count {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #b0a89c;
+  }
+  .index-rule {
+    height: 1px;
+    background: #ede6d8;
+    margin-bottom: 32px;
+  }
+  .index-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #8a8175;
+    max-width: 680px;
+  }
+
+  /* ─── Story sections ─── */
+  .story-section {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+  .story-section-parchment {
+    background: #f5f0e8;
+  }
+
+  .story-link {
+    display: contents;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Story I — text left, image right */
+  .story-i-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+
+  /* Story II — centered narrow */
+  .story-ii-layout {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  .story-ii-header {
+    max-width: 760px;
+    width: 100%;
+    text-align: center;
+  }
+  .story-ii-img-wrap {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #ede6d8;
+    aspect-ratio: 21/9;
+  }
+  .story-ii-footer {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  /* Story III — image left, text right */
+  .story-iii-grid {
+    display: grid !important;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+
+  /* Story IV — text left, image right */
+  .story-iv-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 72px;
+    align-items: center;
+  }
+
+  /* Shared story elements */
+  .story-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .story-img-wrap {
+    overflow: hidden;
+    border-radius: 4px;
+    background: #ede6d8;
+  }
+  .story-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 600ms var(--ease-soft);
+  }
+  a:hover .story-img { transform: scale(1.03); }
+
+  .story-numeral {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 80px;
+    font-weight: 400;
+    color: #b8704b;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .story-numeral-light { color: rgba(184,112,75,0.85); }
+
+  .story-kicker {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #8a8175;
+    margin-bottom: 16px;
+  }
+  .story-kicker-light { color: rgba(250,248,244,0.6); }
+
+  .story-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: #1a1714;
+    margin-bottom: 16px;
+  }
+  .story-title-light { color: #faf8f4; }
+
+  .story-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #8a8175;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+  .story-subtitle-light { color: rgba(250,248,244,0.65); }
+
+  .story-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .story-readtime {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #b0a89c;
+  }
+  .story-readtime-light { color: rgba(250,248,244,0.5); }
+
+  .story-read-cta {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #b8704b;
+    transition: opacity 300ms var(--ease-soft);
+  }
+  a:hover .story-read-cta { opacity: 0.75; }
+  .story-cta-light { color: rgba(250,248,244,0.8); }
+
+  /* ─── Divider ─── */
+  .story-divider { padding-inline: 0; }
+  .story-divider hr {
+    border: none;
+    border-top: 1px solid #ede6d8;
+    margin: 0;
+  }
+
+  /* ─── Story V — dark full-bleed ─── */
+  .story-v-section {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+  .story-v-bg {
+    position: absolute;
+    inset: 0;
+  }
+  .story-v-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    opacity: 0.55;
+  }
+  .story-v-overlay {
+    position: absolute;
+    inset: 0;
+    background: #1a1714;
+    opacity: 0.45;
+  }
+  .story-v-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(26,23,20,0.4) 0%, rgba(26,23,20,0.0) 30%, rgba(26,23,20,0.7) 100%);
+  }
+  .story-v-inner {
+    position: relative;
+    z-index: 1;
+    padding-top: 140px;
+    padding-bottom: 140px;
+    width: 100%;
+  }
+  .story-v-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+  }
+  .story-v-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 900px) {
+    .story-i-grid,
+    .story-iii-grid,
+    .story-iv-grid,
+    .story-v-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px;
+    }
+    .story-section { padding-top: 72px; padding-bottom: 72px; }
+    .story-v-inner { padding-top: 80px; padding-bottom: 80px; }
+  }
+
+  /* Tablet (640–900px) */
+  @media (max-width: 900px) and (min-width: 641px) {
+    .story-i-grid,
+    .story-iii-grid,
+    .story-iv-grid { gap: 48px; }
+  }
+
+  /* Mobile (≤ 640px) */
+  @media (max-width: 640px) {
+    .site-container { padding-inline: 16px; }
+    .story-section { padding-top: 64px; padding-bottom: 64px; }
+    .index-header-section { padding-top: 48px; padding-bottom: 24px; }
+    .story-numeral { font-size: 48px; }
+    .story-title { font-size: clamp(2rem, 8vw, 2.8rem); }
+    .story-v-section { min-height: 55vh; }
+    .story-v-inner { padding-top: 56px; padding-bottom: 56px; }
+    .story-v-grid { grid-template-columns: 1fr !important; gap: 0; }
+    /* Story II: taller aspect-ratio on mobile */
+    .story-ii-img-wrap { aspect-ratio: 4/3; }
+    .story-ii-layout { gap: 24px; }
+    .story-meta-row { gap: 16px; }
+  }
+</style>
+
+<script>
+  // ── Scroll reveal (same pattern as for-editors.astro) ──
+  const revealObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+  document.querySelectorAll(".reveal").forEach((el) => revealObs.observe(el));
+</script>

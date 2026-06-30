@@ -2,12 +2,12 @@
 const { title, subtitle, href, imageSrc, imageAlt } = Astro.props;
 ---
 <a href={href} class="read-more group block">
-  <div class="overflow-hidden rounded-[4px] bg-cream aspect-[4/3]">
+  <div class="overflow-hidden rounded bg-cream aspect-[4/3]">
     <img
       src={imageSrc}
       alt={imageAlt}
       loading="lazy"
-      class="card-img h-full w-full object-cover"
+      class="card-img h-full w-full object-cover rounded"
     />
   </div>
   <div class="pt-5">

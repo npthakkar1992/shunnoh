@@ -5,14 +5,14 @@ const { images = [], caption = "", alt = "" } = Astro.props;
 const single = images.length === 1;
 ---
 <figure class="my-10">
-  <div class={single ? "" : "grid gap-5 sm:grid-cols-2"}>
+  <div class={single ? "" : "flex flex-wrap gap-2"}>
     {images.map((src, i) => (
-      <div class={`overflow-hidden rounded-sm bg-cream ${single ? "aspect-[3/2]" : "aspect-[4/3]"}`}>
+      <div class={`overflow-hidden rounded bg-cream ${single ? "aspect-[3/2]" : "aspect-[4/3]"}`} style={single ? "" : "flex: 1 1 calc(50% - 4px); min-width: min(280px, 100%)"}>
         <img
           src={src}
           alt={caption || alt || `Image ${i + 1}`}
           loading="lazy"
-          class="img-hover h-full w-full object-cover"
+          class="img-hover h-full w-full object-cover rounded"
         />
       </div>
     ))}

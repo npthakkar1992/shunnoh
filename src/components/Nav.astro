@@ -5,21 +5,15 @@ const { current = "" } = Astro.props;
   id="site-nav"
   class="site-nav sticky top-0 z-50 w-full border-b border-[rgba(26,23,20,0.06)]"
 >
-  <nav class="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10 h-16 flex items-center justify-between">
+    <nav class="mx-auto px-4 sm:px-6 lg:px-14 h-[72px] flex items-center justify-between" style="max-width:1360px;">
     <a href="/" aria-label="Shunnoh — home" class="block nav-logo">
-      <img
-        src="/images/branding/logo-wordmark-dark.svg"
-        alt="Shunnoh"
-        class="h-7 w-auto"
-        width="210"
-        height="48"
-      />
+      <span class="nav-wordmark">Shunnoh</span>
     </a>
 
     <div class="flex items-center gap-6 sm:gap-8">
       <a
         href="/blogs"
-        class={`nav-underline font-ui text-sm uppercase tracking-wider ${current === "blogs" ? "text-ink" : "text-stone hover:text-terracotta"}`}
+        class={`nav-underline font-ui text-sm uppercase tracking-wider hidden sm:inline ${current === "blogs" ? "text-ink" : "text-stone hover:text-terracotta"}`}
       >Blogs</a>
 
       <div class="flex items-center gap-4">
@@ -51,8 +45,16 @@ const { current = "" } = Astro.props;
     backdrop-filter: blur(12px);
     box-shadow: 0 1px 8px rgba(26, 23, 20, 0.04);
   }
-  .nav-logo img { transition: opacity 300ms var(--ease-soft); }
-  .nav-logo:hover img { opacity: 0.85; }
+  .nav-wordmark {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 26px;
+    font-weight: 400;
+    color: #1a1714;
+    line-height: 1;
+    transition: opacity 300ms var(--ease-soft);
+  }
+  .nav-logo:hover .nav-wordmark { opacity: 0.8; }
   .nav-underline { transition: color 400ms var(--ease-soft); position: relative; }
   .nav-underline::after { transition: width 400ms var(--ease-soft); }
   .nav-social { display: inline-flex; transition: color 300ms var(--ease-soft), transform 300ms var(--ease-soft); }

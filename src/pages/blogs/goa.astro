@@ -3,7 +3,23 @@ import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 import ImagePair from "../../components/ImagePair.astro";
 import post from "../../content/goa.json";
 ---
-<BlogPostLayout title={post.title} subtitle={post.subtitle} meta={post.meta} hero={post.hero}>
+<BlogPostLayout
+  title={post.title}
+  subtitle={post.subtitle}
+  meta={post.meta}
+  hero={post.hero}
+  numeral="V"
+  kicker="Wild · Mollem, Goa"
+  location="Mollem, Goa"
+  date="September 2025"
+  readTime="8 min"
+  coords="15.4037° N, 74.3200° E"
+  nextSlug="varanasi"
+  nextNumeral="I"
+  nextTitle="Varanasi"
+  nextSubtitle="Here, you either find Him, or you lose faith in Him"
+  nextHero="/images/blog/varanasi/hero.jpg"
+>
   {post.blocks.map((block) =>
     block.type === "h" ? (
       <h2 class="font-display text-2xl sm:text-3xl text-ink mt-12 mb-4 leading-snug">{block.text}</h2>
