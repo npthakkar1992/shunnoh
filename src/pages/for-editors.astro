@@ -5,6 +5,7 @@ const categories = [
   {
     id: "experiential",
     number: "01",
+    labelShort: "Experiential Travel",
     titleLead: "Experiential Travel & ",
     titleEm: "Immersive",
     titleTail: " Writing",
@@ -59,6 +60,7 @@ const categories = [
   {
     id: "destinations",
     number: "02",
+    labelShort: "Destination Stories",
     titleLead: "Destination Stories and the ",
     titleEm: "Murmur",
     titleTail: " of History",
@@ -113,6 +115,7 @@ const categories = [
   {
     id: "craft",
     number: "03",
+    labelShort: "Craft & Culture",
     titleLead: "Craft & Culture — The ",
     titleEm: "Making",
     titleTail: " of Things",
@@ -172,6 +175,9 @@ const skills = [
 ---
 <BaseLayout title="For Editors — Shunnoh" description="Barnali's editorial portfolio — immersive travel writing, cultural features, and destination storytelling for publications." noindex={true}>
   <div class="editor-page paper-texture">
+    <!-- Sticky category label (reader orientation cue) -->
+    <div class="category-sticky-label" aria-hidden="true"></div>
+
     <!-- NAV (frosted) -->
     <nav class="ed-nav">
       <a href="/" class="ed-nav-logo" aria-label="Shunnoh — home"><img src="/images/branding/logo-wordmark-dark.svg" alt="Shunnoh" class="ed-nav-logo-img" width="210" height="48" /></a>
@@ -196,9 +202,9 @@ const skills = [
         <h2 class="section-heading">Styles of Writing</h2>
         <p class="styles-desc"><em>Three ways I approach a place.</em></p>
       </div>
-      <div class="styles-grid reveal reveal-delay-1">
+      <div class="styles-grid">
         {categories.map((c) => (
-          <a href={`#${c.id}`} class="style-card" data-category={c.id}>
+          <a href={`#${c.id}`} class="style-card reveal" data-category={c.id}>
             <span class="style-card-number">{c.number}</span>
             <span class="style-card-title">{c.titleLead}{c.titleEm}{c.titleTail}</span>
             <span class="style-card-line">{c.line}</span>
@@ -212,8 +218,8 @@ const skills = [
 
     <!-- CATEGORY SECTIONS -->
     {categories.map((c) => (
-      <section class={`category-section ${c.bgAlt ? "bg-alt" : ""}`} id={c.id} data-category-section={c.id} data-category-label={`${c.number} — ${c.titleLead}${c.titleEm}${c.titleTail}`}>
-        <div class="category-header reveal">
+      <section class={`category-section ${c.bgAlt ? "bg-alt" : ""}`} id={c.id} data-category-section={c.id} data-category-label={`${c.number} — ${c.labelShort}`} data-bg={c.bgAlt ? "parchment" : "warm-white"}>
+        <div class="category-header">
           <div class="category-number">{c.number}</div>
           <h2 class="category-title">{c.titleLead}<em>{c.titleEm}</em>{c.titleTail}</h2>
           <p class="category-line">{c.line}</p>
@@ -246,7 +252,7 @@ const skills = [
           })}
         </div>
 
-        <div class="bento-grid reveal">
+        <div class="bento-grid">
           {c.bento.map((img, i) => (
             <div class={`bento-cell bento-cell-${i + 1}`}>
               <img src={img.src} alt={img.alt} loading="lazy" />
@@ -330,8 +336,25 @@ const skills = [
     line-height: 1.7;
     overflow-x: hidden;
     animation: edPageFade 0.5s var(--ease-editorial) both;
+    /* Effect 2.8 — background cross-fades between sections */
+    transition: background-color 1200ms var(--ease-soft);
   }
+  .editor-page.bg-parchment { background: var(--parchment); }
   @keyframes edPageFade { from { opacity: 0; } to { opacity: 1; } }
+
+  /* Effect 2.7 — sticky category label (quiet reader orientation cue) */
+  .category-sticky-label {
+    position: fixed; top: 5.5rem; left: 3rem; z-index: 900;
+    font-family: var(--font-body); font-size: 11px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--terracotta);
+    background: rgba(250, 248, 244, 0.8);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    padding: 0.45rem 0.9rem; border-radius: 2px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 400ms var(--ease-soft);
+  }
+  .category-sticky-label.is-visible { opacity: 1; }
+  @media (max-width: 639px) { .category-sticky-label { display: none; } }
 
   .editor-page ::selection {
     background: rgba(184, 112, 75, 0.2);
@@ -414,12 +437,16 @@ const skills = [
     line-height: 1.85; color: var(--stone); max-width: 640px;
   }
 
-  /* HERO LOAD SEQUENCE */
+  /* HERO LOAD SEQUENCE (Effect 2.1) */
   @keyframes edLoadUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes edMaskReveal { to { opacity: 1; clip-path: inset(0 0 0 0); } }
   .ed-load { opacity: 0; will-change: opacity, transform; }
   .ed-load-badge   { transform: translateY(8px);  animation: edLoadUp 0.7s var(--ease-editorial) 0.4s forwards; }
   .ed-load-h1      { transform: translateY(20px); animation: edLoadUp 0.9s var(--ease-editorial) 0.6s forwards; }
-  .ed-load-h1 em   { opacity: 0; transform: translateY(6px); animation: edLoadUp 0.6s var(--ease-editorial) 0.8s forwards; }
+  .ed-load-h1 em   {
+    opacity: 0; clip-path: inset(0 100% 0 0);
+    animation: edMaskReveal 0.6s var(--ease-editorial) 0.8s forwards;
+  }
   .ed-load-tagline { transform: translateY(12px); animation: edLoadUp 0.7s var(--ease-editorial) 1s forwards; }
   .ed-load-intro1  { transform: translateY(12px); animation: edLoadUp 0.8s var(--ease-editorial) 1.2s forwards; }
 
@@ -458,6 +485,17 @@ const skills = [
     text-decoration: none;
     transition: transform 400ms ease, border-color 400ms ease;
   }
+  /* Effect 2.2 — cards stagger in from bottom with blur clearance */
+  .style-card.reveal {
+    transform: translateY(24px);
+    transition:
+      opacity 800ms var(--ease-editorial),
+      transform 800ms var(--ease-editorial), border-color 400ms ease,
+      filter 800ms var(--ease-editorial);
+  }
+  .styles-grid .style-card:nth-child(2) { transition-delay: 140ms; }
+  .styles-grid .style-card:nth-child(3) { transition-delay: 280ms; }
+  .styles-grid .style-card.is-visible:hover { transition-delay: 0ms; }
   .style-card:hover {
     transform: translateY(-3px);
     border-color: rgba(184, 112, 75, 0.6);
@@ -497,7 +535,8 @@ const skills = [
     width: 200px; max-width: 60%; height: 1px;
     background: linear-gradient(to right, transparent, rgba(26,23,20,0.08), transparent);
   }
-  .category-section.bg-alt { background: #f1ebe0; }
+  /* Section fill stays transparent — the page background cross-fades instead (Effect 2.8) */
+  .category-section.bg-alt { background: transparent; }
   .category-section.bg-alt::after {
     content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
     opacity: 0.015;
@@ -507,8 +546,30 @@ const skills = [
   .category-header { max-width: 540px; margin-bottom: 3.5rem; }
   .category-number { font-family: var(--font-display); font-size: 0.85rem; color: #a39e93; margin-bottom: 0.75rem; }
   .category-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 400; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 1rem; color: var(--ink); }
-  .category-title em { font-style: italic; color: rgba(184,112,75,0.9); text-shadow: 0 1px 0 rgba(184,112,75,0.04); }
+  .category-title em { font-style: italic; color: rgba(184,112,75,0.9); text-shadow: 0 1px 0 rgba(184,112,75,0.04); display: inline-block; }
   .category-line { font-family: var(--font-accent); font-size: 1.1rem; font-weight: 300; line-height: 1.7; color: var(--stone); max-width: 500px; }
+
+  /* Effect 2.3 — staged category entry: number → title → em (mask) → description */
+  .category-header .category-number {
+    opacity: 0; transform: translateX(-8px);
+    transition: opacity 400ms var(--ease-editorial), transform 400ms var(--ease-editorial);
+  }
+  .category-header .category-title {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 900ms var(--ease-editorial) 600ms, transform 900ms var(--ease-editorial) 600ms;
+  }
+  .category-header .category-title em {
+    opacity: 0; clip-path: inset(0 100% 0 0);
+    transition: opacity 600ms var(--ease-editorial) 800ms, clip-path 600ms var(--ease-editorial) 800ms;
+  }
+  .category-header .category-line {
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 800ms var(--ease-editorial) 800ms, transform 800ms var(--ease-editorial) 800ms;
+  }
+  .category-header.is-visible .category-number { opacity: 1; transform: translateX(0); }
+  .category-header.is-visible .category-title { opacity: 1; transform: translateY(0); }
+  .category-header.is-visible .category-title em { opacity: 1; clip-path: inset(0 0 0 0); }
+  .category-header.is-visible .category-line { opacity: 1; transform: translateY(0); }
 
   /* ARTICLE GRID */
   .article-grid {
@@ -521,6 +582,16 @@ const skills = [
     display: flex; flex-direction: column;
     text-decoration: none;
   }
+  /* Effect 2.3 (4) — article cards stagger in, 100ms between cards */
+  .article-card.reveal {
+    transition:
+      opacity 700ms var(--ease-editorial),
+      transform 700ms var(--ease-editorial),
+      filter 700ms var(--ease-editorial);
+  }
+  .article-grid .article-card:nth-child(2) { transition-delay: 100ms; }
+  .article-grid .article-card:nth-child(3) { transition-delay: 200ms; }
+  .article-grid .article-card.is-visible:hover { transition-delay: 0ms; }
   .article-card-imgwrap {
     display: block; aspect-ratio: 4/3; overflow: hidden;
     border-radius: 8px; background: var(--cream); margin-bottom: 1.1rem;
@@ -546,7 +617,7 @@ const skills = [
     align-self: flex-start;
     transition: color 400ms var(--ease-soft), background-size 500ms var(--ease-out-soft);
   }
-  a.article-card:hover .article-card-title { color: var(--terracotta); background-size: 100% 1px; }
+  a.article-card:hover .article-card-title { color: var(--terracotta); background-size: 100% 1px; transition: color 600ms var(--ease-soft), background-size 500ms var(--ease-out-soft); }
   .article-card-city {
     font-family: var(--font-body); font-size: 10px; font-weight: 500;
     letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone-light);
@@ -586,18 +657,69 @@ const skills = [
   .bento-cell-4 { grid-column: 4; grid-row: 2; }
   .bento-cell-5 { grid-column: 3 / span 2; grid-row: 3; }
 
+  /* Effect 2.3 (5) — bento cells reveal with a clip-path from the bottom, curtains lifting */
+  .bento-grid .bento-cell {
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 900ms var(--ease-editorial);
+  }
+  .bento-grid.is-visible .bento-cell { clip-path: inset(0 0 0 0); }
+  .bento-grid .bento-cell-2 { transition-delay: 150ms; }
+  .bento-grid .bento-cell-3 { transition-delay: 300ms; }
+  .bento-grid .bento-cell-4 { transition-delay: 450ms; }
+  .bento-grid .bento-cell-5 { transition-delay: 600ms; }
+
+  /* Effect 2.5 — very subtle scroll-linked parallax on bento cells (desktop only) */
+  @supports (animation-timeline: view()) {
+    @media (min-width: 640px) and (prefers-reduced-motion: no-preference) {
+      .bento-grid.is-visible .bento-cell img {
+        animation: bentoParallaxSmall linear both;
+        animation-timeline: view();
+        animation-range: entry 0% exit 100%;
+      }
+      .bento-grid.is-visible .bento-cell-1 img { animation-name: bentoParallaxLarge; }
+    }
+  }
+  @keyframes bentoParallaxLarge {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-12px); }
+  }
+  @keyframes bentoParallaxSmall {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-8px); }
+  }
+
   /* EXCERPTS */
   .category-excerpts { margin-bottom: 1rem; }
   .theme-excerpt {
-    position: relative; border-left: 2px solid rgba(184,112,75,0.7);
+    position: relative;
     padding-left: 2.5rem; margin-bottom: 3rem; max-width: 650px;
   }
   .theme-excerpt:last-child { margin-bottom: 0; }
+  .theme-excerpt::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: rgba(184,112,75,0.7);
+  }
   .theme-excerpt blockquote {
     font-family: var(--font-accent); font-size: clamp(1.2rem, 1.8vw, 1.5rem);
     font-weight: 300; font-style: italic; line-height: 1.7; color: var(--ink);
     letter-spacing: -0.005em;
   }
+
+  /* Effect 2.6 — border draws itself top-to-bottom while the text fades in */
+  .theme-excerpt.reveal {
+    opacity: 1; transform: none; filter: none;
+    transition: none;
+  }
+  .theme-excerpt.reveal::before {
+    transform: scaleY(0); transform-origin: top;
+    transition: transform 400ms var(--ease-editorial);
+  }
+  .theme-excerpt.reveal blockquote {
+    opacity: 0;
+    transition: opacity 600ms var(--ease-editorial);
+  }
+  .theme-excerpt.reveal.is-visible::before { transform: scaleY(1); }
+  .theme-excerpt.reveal.is-visible blockquote { opacity: 1; }
 
   /* ABOUT BARNALI */
   .editor-page .about-barnali { padding: 7rem 6rem; position: relative; }
@@ -667,20 +789,29 @@ const skills = [
 
   /* REDUCED MOTION */
   @media (prefers-reduced-motion: reduce) {
-    .editor-page { animation: none; }
-    .editor-page .reveal {
-      opacity: 1 !important; transform: none !important; filter: none !important;
+    .editor-page { animation: none; transition: none; }
+    .editor-page .reveal,
+    .theme-excerpt.reveal blockquote,
+    .category-header .category-number,
+    .category-header .category-title,
+    .category-header .category-title em,
+    .category-header .category-line {
+      opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important;
     }
+    .theme-excerpt.reveal::before { transform: none !important; }
+    .bento-grid .bento-cell { clip-path: none !important; }
     .ed-load, .ed-load-h1 em {
-      opacity: 1 !important; transform: none !important; animation: none !important;
+      opacity: 1 !important; transform: none !important; animation: none !important; clip-path: none !important;
     }
     .editor-cta-explore a:hover svg { animation: none; }
   }
 </style>
 
 <script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll(".editor-page .reveal");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobile = window.matchMedia("(max-width: 639px)").matches;
+
+  // Scroll reveal — .reveal elements plus the staged category headers and bento grids
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -692,7 +823,9 @@ const skills = [
     },
     { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
   );
-  reveals.forEach((el) => observer.observe(el));
+  document
+    .querySelectorAll(".editor-page .reveal, .editor-page .category-header, .editor-page .bento-grid")
+    .forEach((el) => observer.observe(el));
 
   // Smooth anchor scroll (nav + style cards). Targets carry scroll-margin-top: 96px.
   document.querySelectorAll('.editor-page a[href^="#"]').forEach((anchor) => {
@@ -704,4 +837,74 @@ const skills = [
       }
     });
   });
+
+  // Effects 2.7 / 2.8 / 2.9 — sticky category label, background shift, active card.
+  // One throttled scroll handler tracks which category section spans the viewport middle.
+  const page = document.querySelector(".editor-page");
+  const stickyLabel = document.querySelector(".category-sticky-label");
+  const sections = Array.from(document.querySelectorAll("[data-category-section]"));
+  const styleCards = Array.from(document.querySelectorAll(".style-card[data-category]"));
+  let currentCategory = null;
+
+  function setActiveCategory(section) {
+    const id = section ? section.dataset.categorySection : null;
+    if (id === currentCategory) return;
+    currentCategory = id;
+
+    if (stickyLabel) {
+      if (section) {
+        stickyLabel.textContent = section.dataset.categoryLabel;
+        stickyLabel.classList.add("is-visible");
+      } else {
+        stickyLabel.classList.remove("is-visible");
+      }
+    }
+    if (page) {
+      page.classList.toggle("bg-parchment", !!section && section.dataset.bg === "parchment");
+    }
+    styleCards.forEach((card) => {
+      card.classList.toggle("is-active", card.dataset.category === id);
+    });
+  }
+
+  let categoryTick = false;
+  function updateCategory() {
+    const mid = window.innerHeight / 2;
+    let active = null;
+    for (const s of sections) {
+      const rect = s.getBoundingClientRect();
+      if (rect.top <= mid && rect.bottom >= mid) { active = s; break; }
+    }
+    setActiveCategory(active);
+    categoryTick = false;
+  }
+  window.addEventListener("scroll", () => {
+    if (!categoryTick) { categoryTick = true; requestAnimationFrame(updateCategory); }
+  }, { passive: true });
+  updateCategory();
+
+  // Effect 2.5 fallback — JS parallax for browsers without animation-timeline: view().
+  // Desktop only; disabled on mobile and for reduced motion.
+  if (!reduceMotion && !isMobile && !CSS.supports("animation-timeline: view()")) {
+    const cells = Array.from(document.querySelectorAll(".editor-page .bento-cell img"));
+    let parallaxTick = false;
+    const update = () => {
+      const vh = window.innerHeight;
+      for (const img of cells) {
+        const cell = img.parentElement;
+        const rect = cell.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > vh) continue;
+        const progress = 1 - (rect.top + rect.height / 2) / (vh + rect.height);
+        const max = cell.classList.contains("bento-cell-1") ? -12 : -8;
+        img.style.transform = `translateY(${(progress * max).toFixed(2)}px)`;
+      }
+      parallaxTick = false;
+    };
+    const onScroll = () => {
+      if (!parallaxTick) { parallaxTick = true; requestAnimationFrame(update); }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  }
 </script>
