@@ -38,6 +38,19 @@
   --duration-reveal: 900ms;
   --duration-slow: 1100ms;
 }
+/* Mobile: durations reduced ~30% (users scroll faster on mobile) */
+@media (max-width: 639px) {
+  :root {
+    --duration-instant: 140ms;
+    --duration-fast: 280ms;
+    --duration-medium: 490ms;
+    --duration-reveal: 630ms;
+    --duration-slow: 770ms;
+  }
+  .hero-load-1 { animation-duration: 560ms; }
+  .hero-load-2, .hero-load-3 { animation-duration: 490ms; }
+  .hero-fade { animation-duration: 980ms; }
+}
 
 /* ---------- Base ---------- */
 html {

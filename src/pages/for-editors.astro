@@ -791,6 +791,24 @@ const skills = [
     .bento-grid { grid-template-columns: 1fr; }
   }
 
+  /* MOBILE MOTION — durations reduced ~30% */
+  @media (max-width: 639px) {
+    .editor-page .reveal,
+    .style-card.reveal,
+    .article-card.reveal,
+    .bento-grid .bento-cell { transition-duration: 630ms; }
+    .category-header .category-number { transition-duration: 280ms; }
+    .category-header .category-title,
+    .category-header .category-line { transition-duration: 630ms; }
+    .category-header .category-title em { transition-duration: 420ms; }
+    .theme-excerpt.reveal::before { transition-duration: 280ms; }
+    .theme-excerpt.reveal blockquote { transition-duration: 420ms; }
+    .ed-load-badge { animation-duration: 490ms; }
+    .ed-load-h1 { animation-duration: 630ms; }
+    .ed-load-h1 em, .ed-load-tagline { animation-duration: 420ms; }
+    .ed-load-intro1 { animation-duration: 560ms; }
+  }
+
   /* REDUCED MOTION */
   @media (prefers-reduced-motion: reduce) {
     .editor-page { animation: none; transition: none; }
