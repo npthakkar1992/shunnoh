@@ -24,6 +24,9 @@ const {
 } = Astro.props;
 ---
 <BaseLayout title={seoTitle ?? `${title} — Shunnoh`} description={seoDescription ?? subtitle}>
+  <!-- Reading progress (blog posts only) -->
+  <div class="scroll-progress" aria-hidden="true"></div>
+
   <Nav current="blogs" />
 
   <!-- Back link -->
@@ -43,7 +46,7 @@ const {
     <p class="article-subtitle hero-load hero-load-3">{subtitle}</p>
     {(date || readTime || location) && (
       <p class="article-meta hero-load hero-load-3">
-        {date}{date && readTime ? " • " : ""}{readTime}{(date || readTime) && location ? " • " : ""}{location}
+        {date}{date && readTime && <span class="meta-sep">•</span>}{readTime}{(date || readTime) && location && <span class="meta-sep">•</span>}{location}
       </p>
     )}
   </header>
@@ -152,11 +155,10 @@ const {
     margin-bottom: 1.25rem;
   }
   .article-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic;
-    font-size: clamp(56px, 8vw, 120px);
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
     font-weight: 400;
-    line-height: 1.0;
+    line-height: 1.1;
     letter-spacing: -0.02em;
     color: #1a1714;
     margin-bottom: 1rem;
@@ -164,18 +166,43 @@ const {
   .article-subtitle {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-style: italic;
-    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
-    font-weight: 300;
-    line-height: 1.45;
-    color: #2d2a26;
+    font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.4;
+    color: #1a1714;
     margin-bottom: 1.5rem;
   }
   .article-meta {
     font-family: var(--font-ui);
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: #8a8175;
+    letter-spacing: 0.2em;
+    color: var(--color-stone-light);
+  }
+  .article-meta .meta-sep {
+    color: var(--color-terracotta);
+    margin: 0 0.6em;
+  }
+
+  /* Scroll progress — 2px terracotta bar, very subtle */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 2px; z-index: 1100;
+    background: var(--color-terracotta);
+    opacity: 0.6;
+    transform-origin: left;
+    transform: scaleX(0);
+    pointer-events: none;
+  }
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+      animation: progressGrow linear both;
+      animation-timeline: scroll();
+    }
+  }
+  @keyframes progressGrow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
   }
 
   .hero-wrap { padding-bottom: 0; }
@@ -428,6 +455,24 @@ const {
       child.classList.add("reveal");
       revealObs.observe(child);
     });
+  }
+
+  // ── Scroll progress fallback (browsers without animation-timeline: scroll()) ──
+  if (!CSS.supports("animation-timeline: scroll()")) {
+    const bar = document.querySelector(".scroll-progress") as HTMLElement | null;
+    if (bar) {
+      let ticking = false;
+      const update = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+        bar.style.transform = `scaleX(${progress.toFixed(4)})`;
+        ticking = false;
+      };
+      window.addEventListener("scroll", () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
+    }
   }
 
   // ── Copy link button ──
