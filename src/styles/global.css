@@ -200,6 +200,8 @@ h1 em, h2 em {
 .marquee-left  { animation: marquee-left  40s linear infinite; }
 .marquee-right { animation: marquee-right 40s linear infinite; }
 .marquee-row:hover .marquee-track { animation-play-state: paused; }
+.marquee-track img { transition: filter 800ms var(--ease-soft); }
+.marquee-track > div:hover img { filter: brightness(1.05); }
 @media (prefers-reduced-motion: reduce) {
   .marquee-left, .marquee-right { animation: none; }
 }
@@ -366,8 +368,12 @@ h1 em, h2 em {
 .group:hover .card-img { transform: scale(1.04); filter: brightness(1.05); }
 
 /* ---------- Title underline slide-in (cards) ---------- */
-.title-underline { position: relative; display: inline; background-image: linear-gradient(var(--color-terracotta), var(--color-terracotta)); background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 1px; transition: background-size 300ms var(--ease-soft); }
+.title-underline { position: relative; display: inline; background-image: linear-gradient(var(--color-terracotta), var(--color-terracotta)); background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 1px; transition: background-size 500ms var(--ease-out-soft); }
 .group:hover .title-underline { background-size: 100% 1px; }
+
+/* ---------- Card lift (sitewide hover) ---------- */
+.card-lift { transition: transform 500ms var(--ease-soft); }
+.card-lift:hover { transform: translateY(-3px); }
 
 /* ---------- Inline image brightness hover ---------- */
 .img-hover { transition: filter 600ms var(--ease-soft); }
