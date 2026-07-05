@@ -181,16 +181,16 @@ const goa         = blogCards[4];
   }
   .index-rule {
     height: 1px;
-    background: #ede6d8;
+    background: var(--color-mist);
     margin-bottom: 32px;
   }
   .index-intro {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.2rem;
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
     font-weight: 300;
-    line-height: 1.8;
+    line-height: 1.85;
     color: #8a8175;
-    max-width: 680px;
+    max-width: 640px;
   }
 
   /* ─── Story sections ─── */
@@ -273,9 +273,9 @@ const goa         = blogCards[4];
     height: 100%;
     object-fit: cover;
     border-radius: 4px;
-    transition: transform 600ms var(--ease-soft);
+    transition: transform 800ms var(--ease-soft), filter 800ms var(--ease-soft);
   }
-  a:hover .story-img { transform: scale(1.03); }
+  a:hover .story-img { transform: scale(1.03); filter: brightness(1.05); }
 
   .story-numeral {
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -307,8 +307,11 @@ const goa         = blogCards[4];
     letter-spacing: -0.02em;
     color: #1a1714;
     margin-bottom: 16px;
+    transition: color 400ms var(--ease-soft);
   }
+  a:hover .story-title { color: var(--color-terracotta); }
   .story-title-light { color: #faf8f4; }
+  a:hover .story-title-light { color: #faf8f4; }
 
   .story-subtitle {
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -350,7 +353,7 @@ const goa         = blogCards[4];
   .story-divider { padding-inline: 0; }
   .story-divider hr {
     border: none;
-    border-top: 1px solid #ede6d8;
+    border-top: 1px solid var(--color-mist);
     margin: 0;
   }
 
