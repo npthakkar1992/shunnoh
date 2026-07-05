@@ -17,6 +17,8 @@
   --color-terracotta: #b8704b;
   --color-terracotta-deep: #9a5a38;
   --color-moss: #4a5d4a;
+  --color-mist: #eae4d7;      /* Even softer than parchment — for section dividers, hover surfaces */
+  --color-blush: #efe6dc;     /* A whisper of pink-warmth — for subtle accents in dark sections */
 
   /* Font families */
   --font-display: "Playfair Display", Georgia, serif;
@@ -115,6 +117,22 @@ body {
   .type-body { font-size: 1.1rem; }
 }
 
+/* ---------- Italic accent words in headings (Kelsey) ---------- */
+h1 em, h2 em {
+  font-style: italic;
+  color: var(--color-terracotta);
+  text-shadow: 0 1px 0 rgba(184, 112, 75, 0.04);
+}
+
+/* ---------- Section spacing rhythm (Kelsey-generous) ---------- */
+.section-pad { padding: 7rem 6rem; }
+@media (max-width: 1023px) {
+  .section-pad { padding: 5rem 3rem; }
+}
+@media (max-width: 639px) {
+  .section-pad { padding: 4rem 1.5rem; }
+}
+
 /* ---------- Soft link underline (Kelsey) ---------- */
 .soft-link {
   color: var(--color-terracotta);
@@ -125,6 +143,19 @@ body {
   transition: text-decoration-color 400ms var(--ease-soft), color 400ms var(--ease-soft);
 }
 .soft-link:hover {
+  text-decoration-color: rgba(184, 112, 75, 1);
+  color: var(--color-terracotta-deep);
+}
+/* Prose links get the soft treatment by default */
+.post-body a {
+  color: var(--color-terracotta);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(184, 112, 75, 0.3);
+  transition: text-decoration-color 400ms var(--ease-soft), color 400ms var(--ease-soft);
+}
+.post-body a:hover {
   text-decoration-color: rgba(184, 112, 75, 1);
   color: var(--color-terracotta-deep);
 }
