@@ -168,6 +168,10 @@ const categories = [
   },
 ];
 
+// focal: top | center | bottom | left | right | custom "50% 25%" — maps to object-position
+const focalMap = { top: "center top", center: "center", bottom: "center bottom", left: "left center", right: "right center" };
+const objectPosition = (f) => focalMap[f ?? "center"] ?? f;
+
 const skills = [
   "Consumer Research (Nielsen)", "Search Strategy & SEO", "Editorial Writing",
   "Travel Photography", "Cultural & Historical Research", "Hindi · Bengali · English",
@@ -255,7 +259,7 @@ const skills = [
         <div class="bento-grid">
           {c.bento.map((img, i) => (
             <div class={`bento-cell bento-cell-${i + 1}`}>
-              <img src={img.src} alt={img.alt} loading="lazy" />
+              <img src={img.src} alt={img.alt} loading="lazy" style={`object-position:${objectPosition(img.focal)};`} />
             </div>
           ))}
         </div>

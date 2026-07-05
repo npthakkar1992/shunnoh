@@ -54,7 +54,7 @@ const {
   <!-- Wide hero image -->
   <div class="hero-wrap mx-auto px-4 md:px-6" style="max-width:1180px;margin-bottom:0;">
     <div class="article-hero-frame hero-fade overflow-hidden" style="border-radius:4px;background:#ede6d8;">
-      <img src={hero} alt={title} class="kenburns h-full w-full object-cover rounded" />
+      <img src={hero} alt={title} loading="eager" class="kenburns h-full w-full object-cover rounded" />
     </div>
   </div>
 
@@ -393,7 +393,7 @@ const {
 
   /* ── Mobile (≤ 640px) — placed last so it wins over base rules ── */
   @media (max-width: 640px) {
-    .article-hero-frame { aspect-ratio: 4/3; }
+    .article-hero-frame { aspect-ratio: 4/5; }
 
     /* Compact horizontal aside strip */
     .article-aside {

@@ -1,5 +1,8 @@
 ---
-const { title, subtitle, href, imageSrc, imageAlt } = Astro.props;
+// focal: top | center | bottom | left | right | custom "50% 25%" — maps to object-position
+const { title, subtitle, href, imageSrc, imageAlt, focal = "center" } = Astro.props;
+const focalMap = { top: "center top", center: "center", bottom: "center bottom", left: "left center", right: "right center" };
+const objectPosition = focalMap[focal] ?? focal;
 ---
 <a href={href} class="read-more card-lift group block">
   <div class="overflow-hidden rounded bg-cream aspect-[4/3]">
@@ -8,6 +11,7 @@ const { title, subtitle, href, imageSrc, imageAlt } = Astro.props;
       alt={imageAlt}
       loading="lazy"
       class="card-img h-full w-full object-cover rounded"
+      style={`object-position:${objectPosition};`}
     />
   </div>
   <div class="pt-5">

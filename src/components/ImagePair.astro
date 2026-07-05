@@ -1,8 +1,15 @@
 ---
 // Renders 1+ images. Two side-by-side on desktop (stacked on mobile) is the
 // common case; a single image spans full width. A shared caption sits below.
-const { images = [], caption = "", alt = "" } = Astro.props;
+// focal (all images) or focals[i] (per image): top | center | bottom | left |
+// right | custom "50% 25%" — maps to object-position for smart cropping.
+const { images = [], caption = "", alt = "", focal = "center", focals = [] } = Astro.props;
 const single = images.length === 1;
+const focalMap = { top: "center top", center: "center", bottom: "center bottom", left: "left center", right: "right center" };
+const objectPosition = (i) => {
+  const f = focals[i] ?? focal;
+  return focalMap[f] ?? f;
+};
 ---
 <figure class="my-10">
   <div class={single ? "" : "flex flex-wrap gap-5"}>
@@ -13,6 +20,7 @@ const single = images.length === 1;
           alt={caption || alt || `Image ${i + 1}`}
           loading="lazy"
           class="img-hover h-full w-full object-cover rounded"
+          style={`object-position:${objectPosition(i)};`}
         />
       </div>
     ))}
